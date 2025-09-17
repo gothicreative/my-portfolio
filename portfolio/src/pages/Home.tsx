@@ -53,7 +53,7 @@ const Home: React.FC = () => {
                 variants={fadeInUpVariants}
                 className="text-5xl lg:text-6xl font-display font-bold mb-6"
               >
-                Full-Stack{' '}
+                Fu-Stack{' '}
                 <span className="text-gradient">Mobile Developer</span>
                 {' '}& Digital Artist
               </motion.h1>

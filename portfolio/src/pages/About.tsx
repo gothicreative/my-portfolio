@@ -110,7 +110,7 @@ const About: React.FC = () => {
                 {/* Profile Image */}
                 <img 
                   
-                  src="src/assets/mypng(1).png" 
+                  src="/images/profile.png" 
                   alt="Hafiz Adem - Full Stack Developer"
                   className="absolute inset-0 w-full h-full object-cover object-center"
                   onError={(e) => {
