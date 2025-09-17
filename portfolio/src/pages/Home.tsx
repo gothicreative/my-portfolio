@@ -89,7 +89,7 @@ const Home: React.FC = () => {
                 variants={fadeInUpVariants}
                 className="flex flex-wrap gap-4"
               >
-                {techStack.map((tech, index) => (
+                {techStack.map((tech) => (
                   <motion.div
                     key={tech.name}
                     whileHover={{ scale: 1.1, y: -2 }}

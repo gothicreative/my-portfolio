@@ -40,7 +40,7 @@ const Contact: React.FC = () => {
 
   const projectType = watch('projectType');
 
-  const onSubmit = async (data: ContactFormData) => {
+  const onSubmit = async (_: ContactFormData) => {
     setIsSubmitting(true);
     setSubmitStatus('idle');
 

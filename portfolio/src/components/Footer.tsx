@@ -38,7 +38,7 @@ const Footer: React.FC = () => {
               innovative web and mobile solutions with creative flair.
             </p>
             <div className="flex space-x-4">
-              {socialLinks.map((social, index) => (
+              {socialLinks.map((social) => (
                 <motion.a
                   key={social.label}
                   href={social.url}

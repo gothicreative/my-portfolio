@@ -11,13 +11,10 @@ import {
   FaUsers,
   FaTrophy,
   FaRocket,
-  FaMobile,
-  FaPalette,
-  FaServer,
-  FaDatabase
+  FaPalette
 } from 'react-icons/fa';
 import { SiReact, SiNodedotjs, SiMongodb, SiExpress, SiTypescript } from 'react-icons/si';
-import { EXPERIENCE_DATA, SAMPLE_PROJECTS } from '../utils/constants';
+import { SAMPLE_PROJECTS } from '../utils/constants';
 
 const Experience: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState<'timeline' | 'projects'>('timeline');

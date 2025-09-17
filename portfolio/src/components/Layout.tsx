@@ -5,7 +5,6 @@ import Footer from './Footer';
 
 const Layout: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [currentSection, setCurrentSection] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,7 +18,7 @@ const Layout: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header isScrolled={isScrolled} currentSection={currentSection} />
+      <Header isScrolled={isScrolled} currentSection="" />
       <main className="flex-grow pt-20">
         <Outlet />
       </main>

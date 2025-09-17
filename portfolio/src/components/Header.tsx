@@ -10,7 +10,7 @@ interface HeaderProps {
   currentSection: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ isScrolled, currentSection }) => {
+const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
