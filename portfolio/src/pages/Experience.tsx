@@ -49,7 +49,7 @@ const Experience: React.FC = () => {
       type: 'work',
       title: 'Frontend Developer & UI Designer',
       company: 'Creative Digital Agency',
-      location: 'New York, NY',
+      location: 'Remote',
       period: '2022 - 2023',
       description: 'Specialized in creating beautiful, responsive web applications and custom digital illustrations.',
       achievements: [
@@ -67,7 +67,7 @@ const Experience: React.FC = () => {
       type: 'education',
       title: 'Full-Stack Web Development Bootcamp',
       company: 'Tech Academy',
-      location: 'San Francisco, CA',
+      location: 'Remote',
       period: '2021 - 2022',
       description: 'Intensive 12-month program focusing on modern web development technologies and best practices.',
       achievements: [
@@ -85,7 +85,7 @@ const Experience: React.FC = () => {
       type: 'work',
       title: 'Junior Web Developer',
       company: 'StartupLab',
-      location: 'Austin, TX',
+      location: 'Remote',
       period: '2021 - 2022',
       description: 'First professional role focusing on frontend development and learning modern React patterns.',
       achievements: [

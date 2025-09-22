@@ -86,8 +86,8 @@ const About: React.FC = () => {
                 className="flex flex-wrap gap-4"
               >
                 <a 
-                  href="/cv-updated--MERN-.pdf" 
-                  download="Hafiz_Adem_Resume.pdf"
+                  href="/HafizAdemCV.pdf" 
+                  download="HafizAdemCV.pdf"
                   className="btn-primary inline-flex items-center"
                 >
                   <FaDownload className="mr-2" />

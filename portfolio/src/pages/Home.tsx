@@ -53,8 +53,8 @@ const Home: React.FC = () => {
                 variants={fadeInUpVariants}
                 className="text-5xl lg:text-6xl font-display font-bold mb-6"
               >
-                Fu-Stack{' '}
-                <span className="text-gradient">Mobile Developer</span>
+                Full-Stack {''} 
+                <span className="text-gradient">MERN Developer</span>
                 {' '}& Digital Artist
               </motion.h1>
               
@@ -75,8 +75,8 @@ const Home: React.FC = () => {
                   <FaArrowRight className="ml-2" />
                 </Link>
                 <a 
-                  href="/cv-updated--MERN-.pdf" 
-                  download="Hafiz_Adem_Resume.pdf"
+                  href="HafizAdemCV.pdf" 
+                  download="HafizAdemCV.pdf"
                   className="btn-outline inline-flex items-center"
                 >
                   <FaDownload className="mr-2" />
@@ -153,7 +153,7 @@ const Home: React.FC = () => {
                   transition={{ duration: 4, repeat: Infinity }}
                   className="absolute top-8 right-8 w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center backdrop-blur-sm"
                 >
-                  <span className="text-green-400 font-mono text-lg">{'{'}</span>
+                  <span className="text-green-400 font-mono text-lg">Hafiz</span>
                 </motion.div>
                 <motion.div
                   animate={{ y: [10, -10, 10], opacity: [0.8, 0.3, 0.8] }}

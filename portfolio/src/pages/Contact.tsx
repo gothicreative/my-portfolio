@@ -24,6 +24,21 @@ import {
 import { CONTACT_INFO } from '../utils/constants';
 import type { ContactFormData } from '../types';
 
+// ⚠️ IMPORTANT: REPLACE THESE PLACEHOLDER VALUES WITH YOUR ACTUAL EMAILJS CREDENTIALS
+// 
+// To get your EmailJS credentials:
+// 1. Sign up at https://www.emailjs.com/
+// 2. Create an email service and note the Service ID
+// 3. Create an email template and note the Template ID
+// 4. Get your Public Key from Account → API Keys
+//
+// After getting your credentials, replace the placeholder values below:
+const EMAILJS_CONFIG = {
+  SERVICE_ID: 'your_service_id',      // Replace with your actual Service ID
+  TEMPLATE_ID: 'your_template_id',    // Replace with your actual Template ID
+  PUBLIC_KEY: 'your_public_key'       // Replace with your actual Public Key
+};
+
 const Contact: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -40,27 +55,46 @@ const Contact: React.FC = () => {
 
   const projectType = watch('projectType');
 
-  const onSubmit = async (_: ContactFormData) => {
+  const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
     setSubmitStatus('idle');
+    setSubmitMessage('');
 
     try {
-      // EmailJS configuration - Replace with your actual service details
+      // Check if EmailJS is properly configured
+      if (EMAILJS_CONFIG.SERVICE_ID === 'your_service_id' || 
+          EMAILJS_CONFIG.TEMPLATE_ID === 'your_template_id' || 
+          EMAILJS_CONFIG.PUBLIC_KEY === 'your_public_key') {
+        // Show a more helpful error message with setup instructions
+        throw new Error('EmailJS not properly configured. Please follow the setup instructions in EMAILJS_SETUP.md');
+      }
+
+      // EmailJS configuration
       const result = await emailjs.sendForm(
-        'your_service_id', // Replace with your EmailJS service ID
-        'your_template_id', // Replace with your EmailJS template ID
+        EMAILJS_CONFIG.SERVICE_ID,
+        EMAILJS_CONFIG.TEMPLATE_ID,
         formRef.current!,
-        'your_public_key' // Replace with your EmailJS public key
+        EMAILJS_CONFIG.PUBLIC_KEY
       );
 
       console.log('Email sent successfully:', result.text);
       setSubmitStatus('success');
       setSubmitMessage('Thank you! Your message has been sent successfully. I\'ll get back to you within 24 hours.');
       reset();
-    } catch (error) {
+    } catch (error: any) {
       console.error('Email sending failed:', error);
       setSubmitStatus('error');
-      setSubmitMessage('Sorry, there was an error sending your message. Please try again or contact me directly via email.');
+      
+      // More specific error messages
+      if (error.message && error.message.includes('EmailJS not properly configured')) {
+        setSubmitMessage('EmailJS not properly configured. Please check EMAILJS_SETUP.md for setup instructions.');
+      } else if (error.text === 'Unauthorized') {
+        setSubmitMessage('EmailJS authentication failed. Please check your Public Key.');
+      } else if (error.text === 'Bad Request') {
+        setSubmitMessage('EmailJS request failed. Please check your Service ID and Template ID.');
+      } else {
+        setSubmitMessage(`Error: ${error.text || error.message || 'Unknown error occurred. Please try again or contact me directly at ${CONTACT_INFO.email}'}`);
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -218,6 +252,10 @@ const Contact: React.FC = () => {
               )}
 
               <form ref={formRef} onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                {/* Hidden fields for EmailJS template */}
+                <input type="hidden" name="to_email" value={CONTACT_INFO.email} />
+                <input type="hidden" name="to_name" value="Hafiz Adem" />
+                
                 {/* Basic Info */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
@@ -231,6 +269,7 @@ const Contact: React.FC = () => {
                         errors.name ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                       }`}
                       placeholder="Your full name"
+                      name="from_name"
                     />
                     {errors.name && (
                       <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
@@ -254,6 +293,7 @@ const Contact: React.FC = () => {
                         errors.email ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                       }`}
                       placeholder="your@email.com"
+                      name="reply_to"
                     />
                     {errors.email && (
                       <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
@@ -281,6 +321,7 @@ const Contact: React.FC = () => {
                           {...register('projectType', { required: 'Please select a project type' })}
                           value={type.value}
                           className="sr-only"
+                          name="project_type"
                         />
                         <div className="flex items-start">
                           <type.icon 
@@ -312,6 +353,7 @@ const Contact: React.FC = () => {
                       errors.subject ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                     }`}
                     placeholder="Brief description of your project"
+                    name="subject"
                   />
                   {errors.subject && (
                     <p className="mt-1 text-sm text-red-600">{errors.subject.message}</p>
@@ -327,6 +369,7 @@ const Contact: React.FC = () => {
                     <select
                       {...register('budget')}
                       className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                      name="budget"
                     >
                       <option value="">Select budget range</option>
                       <option value="<5k">Under $5,000</option>
@@ -344,6 +387,7 @@ const Contact: React.FC = () => {
                     <select
                       {...register('timeline')}
                       className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                      name="timeline"
                     >
                       <option value="">Select timeline</option>
                       <option value="asap">ASAP</option>
@@ -367,6 +411,7 @@ const Contact: React.FC = () => {
                       errors.message ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                     }`}
                     placeholder="Tell me about your project, goals, and any specific requirements..."
+                    name="message"
                   />
                   {errors.message && (
                     <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
