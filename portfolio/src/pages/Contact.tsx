@@ -55,7 +55,7 @@ const Contact: React.FC = () => {
 
   const projectType = watch('projectType');
 
-  const onSubmit = async (data: ContactFormData) => {
+  const onSubmit = async () => {
     setIsSubmitting(true);
     setSubmitStatus('idle');
     setSubmitMessage('');
@@ -93,7 +93,7 @@ const Contact: React.FC = () => {
       } else if (error.text === 'Bad Request') {
         setSubmitMessage('EmailJS request failed. Please check your Service ID and Template ID.');
       } else {
-        setSubmitMessage(`Error: ${error.text || error.message || 'Unknown error occurred. Please try again or contact me directly at ${CONTACT_INFO.email}'}`);
+        setSubmitMessage(`Error: ${error.text || error.message || `Unknown error occurred. Please try again or contact me directly at ${CONTACT_INFO.email}`}`);
       }
     } finally {
       setIsSubmitting(false);
