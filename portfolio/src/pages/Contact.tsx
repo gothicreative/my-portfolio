@@ -321,7 +321,6 @@ const Contact: React.FC = () => {
                           {...register('projectType', { required: 'Please select a project type' })}
                           value={type.value}
                           className="sr-only"
-                          name="project_type"
                         />
                         <div className="flex items-start">
                           <type.icon 
