@@ -152,7 +152,7 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <div className="space-y-16">
+    <div className="space-y-20">
       {/* Hero Section */}
       <section className="section-padding bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
         <div className="container-custom">
@@ -178,7 +178,7 @@ const Contact: React.FC = () => {
             
             <motion.p
               variants={fadeInUpVariants}
-              className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto"
+              className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed"
             >
               Ready to bring your ideas to life? Whether you need a full-stack web application, 
               a mobile app, or creative digital solutions, I'm here to help you succeed.
@@ -186,26 +186,26 @@ const Contact: React.FC = () => {
 
             <motion.div
               variants={fadeInUpVariants}
-              className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12"
+              className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16"
             >
-              <div className="text-center">
-                <div className="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="text-center p-6 rounded-2xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
+                <div className="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
                   <FaClock className="w-8 h-8 text-primary-600" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2 dark:text-white">Quick Response</h3>
                 <p className="text-gray-600 dark:text-gray-300">Usually respond within 24 hours</p>
               </div>
               
-              <div className="text-center">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="text-center p-6 rounded-2xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
+                <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
                   <FaRocket className="w-8 h-8 text-green-600" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2 dark:text-white">Fast Development</h3>
                 <p className="text-gray-600 dark:text-gray-300">Agile development with quick iterations</p>
               </div>
               
-              <div className="text-center">
-                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="text-center p-6 rounded-2xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
+                <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
                   <FaDollarSign className="w-8 h-8 text-purple-600" />
                 </div>
                 <h3 className="text-lg font-semibold mb-2 dark:text-white">Fair Pricing</h3>
@@ -233,7 +233,7 @@ const Contact: React.FC = () => {
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="mb-6 p-4 bg-green-100 border border-green-300 rounded-lg flex items-start"
+                  className="mb-6 p-4 bg-green-100 border border-green-300 rounded-2xl flex items-start"
                 >
                   <FaCheckCircle className="w-5 h-5 text-green-600 mt-0.5 mr-3 flex-shrink-0" />
                   <p className="text-green-700 dark:text-green-300">{submitMessage}</p>
@@ -244,7 +244,7 @@ const Contact: React.FC = () => {
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="mb-6 p-4 bg-red-100 border border-red-300 rounded-lg flex items-start"
+                  className="mb-6 p-4 bg-red-100 border border-red-300 rounded-2xl flex items-start"
                 >
                   <FaExclamationTriangle className="w-5 h-5 text-red-600 mt-0.5 mr-3 flex-shrink-0" />
                   <p className="text-red-700 dark:text-red-300">{submitMessage}</p>
@@ -264,7 +264,7 @@ const Contact: React.FC = () => {
                     </label>
                     <input
                       type="text"
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
+                      className={`w-full px-4 py-3 border rounded-2xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
                         errors.name ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                       }`}
                       placeholder="Your full name"
@@ -275,14 +275,14 @@ const Contact: React.FC = () => {
                       <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
                     )}
                   </div>
-                
+                  
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       Email *
                     </label>
                     <input
                       type="email"
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
+                      className={`w-full px-4 py-3 border rounded-2xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
                         errors.email ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                       }`}
                       placeholder="your@email.com"
@@ -310,7 +310,7 @@ const Contact: React.FC = () => {
                     {projectTypes.map((type) => (
                       <label
                         key={type.value}
-                        className={`relative cursor-pointer p-4 border rounded-lg transition-all ${
+                        className={`relative cursor-pointer p-4 border rounded-2xl transition-all ${
                           projectType === type.value
                             ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20'
                             : 'border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500'
@@ -347,7 +347,7 @@ const Contact: React.FC = () => {
                   </label>
                   <input
                     type="text"
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
+                    className={`w-full px-4 py-3 border rounded-2xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
                       errors.subject ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                     }`}
                     placeholder="Brief description of your project"
@@ -366,9 +366,9 @@ const Contact: React.FC = () => {
                       Budget Range
                     </label>
                     <select
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-2xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                       {...register('budget')}
-                    >
+                      >
                       <option value="">Select budget range</option>
                       <option value="<5k">Under $5,000</option>
                       <option value="5k-10k">$5,000 - $10,000</option>
@@ -383,9 +383,9 @@ const Contact: React.FC = () => {
                       Timeline
                     </label>
                     <select
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-2xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                       {...register('timeline')}
-                    >
+                      >
                       <option value="">Select timeline</option>
                       <option value="asap">ASAP</option>
                       <option value="1-2weeks">1-2 weeks</option>
@@ -403,7 +403,7 @@ const Contact: React.FC = () => {
                   </label>
                   <textarea
                     rows={6}
-                    className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors resize-vertical bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
+                    className={`w-full px-4 py-3 border rounded-2xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors resize-vertical bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
                       errors.message ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                     }`}
                     placeholder="Tell me about your project, goals, and any specific requirements..."
@@ -419,7 +419,7 @@ const Contact: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full btn-primary flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full btn-primary flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed rounded-2xl"
                 >
                   {isSubmitting ? (
                     <>
@@ -446,8 +446,8 @@ const Contact: React.FC = () => {
                 <h3 className="text-2xl font-bold mb-6 dark:text-white">Get in Touch</h3>
                 
                 <div className="space-y-4">
-                  <div className="flex items-center">
-                    <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center mr-4">
+                  <div className="flex items-center p-4 rounded-2xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
+                    <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mr-4">
                       <FaEnvelope className="w-6 h-6 text-primary-600" />
                     </div>
                     <div>
@@ -456,8 +456,8 @@ const Contact: React.FC = () => {
                     </div>
                   </div>
                   
-                  <div className="flex items-center">
-                    <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+                  <div className="flex items-center p-4 rounded-2xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
+                    <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mr-4">
                       <FaPhone className="w-6 h-6 text-green-600" />
                     </div>
                     <div>
@@ -466,8 +466,8 @@ const Contact: React.FC = () => {
                     </div>
                   </div>
                   
-                  <div className="flex items-center">
-                    <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                  <div className="flex items-center p-4 rounded-2xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
+                    <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mr-4">
                       <FaMapMarkerAlt className="w-6 h-6 text-purple-600" />
                     </div>
                     <div>
@@ -490,7 +490,7 @@ const Contact: React.FC = () => {
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.1, y: -2 }}
                       whileTap={{ scale: 0.95 }}
-                      className="w-12 h-12 rounded-lg flex items-center justify-center shadow-md hover:shadow-lg transition-shadow"
+                      className="w-12 h-12 rounded-xl flex items-center justify-center shadow-md hover:shadow-lg transition-shadow"
                       style={{ backgroundColor: `${social.color}15` }}
                       aria-label={social.label}
                     >
@@ -504,19 +504,19 @@ const Contact: React.FC = () => {
               <div className="card">
                 <h3 className="text-xl font-bold mb-4 dark:text-white">Current Availability</h3>
                 <div className="space-y-3">
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between p-3 rounded-xl bg-white dark:bg-gray-800">
                     <span className="text-gray-700 dark:text-gray-300">New Projects</span>
                     <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">
                       Available
                     </span>
                   </div>
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between p-3 rounded-xl bg-white dark:bg-gray-800">
                     <span className="text-gray-700 dark:text-gray-300">Response Time</span>
                     <span className="text-gray-600 dark:text-gray-400 text-sm">Within 24 hours</span>
                   </div>
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between p-3 rounded-xl bg-white dark:bg-gray-800">
                     <span className="text-gray-700 dark:text-gray-300">Consultation</span>
-                    <span className="px-3 py-1 bg-blue-100 text-blue-8800 rounded-full text-sm font-medium">
+                    <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
                       Free 30min
                     </span>
                   </div>

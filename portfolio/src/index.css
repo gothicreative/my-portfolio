@@ -10,9 +10,10 @@
   }
   
   body {
-    font-family: Inter, system-ui, sans-serif;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     color: #111827;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     margin: 0;
     min-height: 100vh;
     background-color: #ffffff;
@@ -21,72 +22,85 @@
   
   .dark body {
     color: #f9fafb;
-    background-color: #111827;
+    background-color: #000000;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: 600;
+    letter-spacing: -0.02em;
   }
 }
 
 @layer components {
   .btn-primary {
-    background-color: #0284c7;
+    background-color: #0071e3;
     color: white;
     font-weight: 500;
     padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    transition: all 0.2s;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    border-radius: 0.75rem;
+    transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: none;
+    cursor: pointer;
   }
   
   .btn-primary:hover {
-    background-color: #0369a1;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    background-color: #0077ed;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+  }
+  
+  .btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   }
   
   .btn-secondary {
-    background-color: #e5e7eb;
-    color: #111827;
+    background-color: #f5f5f7;
+    color: #1d1d1f;
     font-weight: 500;
     padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    transition: all 0.2s;
+    border-radius: 0.75rem;
+    transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border: 1px solid #d2d2d7;
   }
   
   .btn-secondary:hover {
-    background-color: #d1d5db;
+    background-color: #e0e0e0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
   .btn-outline {
-    border: 2px solid #0284c7;
-    color: #0284c7;
+    border: 1px solid #0071e3;
+    color: #0071e3;
     font-weight: 500;
     padding: 0.75rem 1.5rem;
-    border-radius: 0.5rem;
-    transition: all 0.2s;
+    border-radius: 0.75rem;
+    transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
     background-color: transparent;
   }
   
   .btn-outline:hover {
-    background-color: #0284c7;
+    background-color: #0071e3;
     color: white;
+    box-shadow: 0 4px 8px rgba(0, 113, 227, 0.2);
   }
   
   .section-padding {
-    padding: 4rem 1rem;
+    padding: 5rem 1.5rem;
   }
   
   @media (min-width: 640px) {
     .section-padding {
-      padding: 4rem 1.5rem;
+      padding: 5rem 2rem;
     }
   }
   
   @media (min-width: 1024px) {
     .section-padding {
-      padding: 4rem 2rem;
+      padding: 5rem 2.5rem;
     }
   }
   
@@ -97,7 +111,7 @@
   }
   
   .text-gradient {
-    background: linear-gradient(to right, #059705, #ca500a);
+    background: linear-gradient(to right, #0071e3, #30d158);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -105,25 +119,28 @@
   
   .card {
     background-color: white;
-    border-radius: 0.75rem;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    padding: 1.5rem;
-    transition: box-shadow 0.3s;
+    border-radius: 1.25rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    padding: 1.75rem;
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
   }
   
   .card:hover {
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
   }
   
   .tech-badge {
     display: inline-flex;
     align-items: center;
-    padding: 0.25rem 0.75rem;
+    padding: 0.375rem 1rem;
     border-radius: 9999px;
     font-size: 0.875rem;
     font-weight: 500;
-    background-color: #dbeafe;
-    color: #1e40af;
+    background-color: #f5f5f7;
+    color: #1d1d1f;
+    border: 1px solid #d2d2d7;
   }
 }
 
@@ -147,26 +164,194 @@
   .transform-gpu {
     transform: translate3d(0, 0, 0);
   }
+  
+  /* Apple-style utility classes */
+  .apple-radius {
+    border-radius: 1.25rem;
+  }
+  
+  .apple-radius-lg {
+    border-radius: 1.5rem;
+  }
+  
+  .apple-radius-xl {
+    border-radius: 2rem;
+  }
+  
+  .apple-shadow {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  }
+  
+  .apple-shadow-lg {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  .apple-transition {
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
 }
 
 /* Dark mode component overrides */
 @layer components {
+  .dark body {
+    color: #f9fafb;
+    background-color: #000000;
+  }
+  
   .dark .card {
-    background-color: #1f2937;
-    border-color: #374151;
+    background-color: #1d1d1f;
+    border-color: #2c2c2e;
+  }
+  
+  .dark .btn-primary {
+    background-color: #0a84ff;
+    color: #ffffff;
+  }
+  
+  .dark .btn-primary:hover {
+    background-color: #0a7cff;
+    box-shadow: 0 4px 8px rgba(10, 132, 255, 0.3);
   }
   
   .dark .btn-secondary {
-    background-color: #374151;
-    color: #f9fafb;
+    background-color: #2c2c2e;
+    color: #f5f5f7;
+    border-color: #424245;
   }
   
   .dark .btn-secondary:hover {
-    background-color: #4b5563;
+    background-color: #3a3a3c;
+  }
+  
+  .dark .btn-outline {
+    border-color: #0a84ff;
+    color: #0a84ff;
+  }
+  
+  .dark .btn-outline:hover {
+    background-color: #0a84ff;
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(10, 132, 255, 0.3);
   }
   
   .dark .tech-badge {
-    background-color: #1e40af;
-    color: #dbeafe;
+    background-color: #2c2c2e;
+    color: #f5f5f7;
+    border-color: #424245;
+  }
+  
+  /* Dark mode overrides for form elements */
+  .dark input,
+  .dark textarea,
+  .dark select {
+    background-color: #1d1d1f;
+    color: #f5f5f7;
+    border-color: #424245;
+  }
+  
+  .dark input:focus,
+  .dark textarea:focus,
+  .dark select:focus {
+    border-color: #0a84ff;
+    box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.3);
+  }
+  
+  /* Dark mode overrides for header */
+  .dark .bg-white\/95 {
+    background-color: rgba(29, 29, 31, 0.95);
+  }
+  
+  .dark .text-gray-700 {
+    color: #d1d1d6;
+  }
+  
+  .dark .hover\:bg-gray-100:hover {
+    background-color: #2c2c2e;
+  }
+  
+  /* Dark mode overrides for mobile menu */
+  .dark .bg-white\/95 {
+    background-color: rgba(29, 29, 31, 0.95);
+  }
+  
+  .dark .border-gray-200 {
+    border-color: #424245;
+  }
+  
+  .dark .hover\:bg-gray-50:hover {
+    background-color: #2c2c2e;
+  }
+  
+  /* Dark mode overrides for sections */
+  .dark .bg-gray-50 {
+    background-color: #1d1d1f;
+  }
+  
+  .dark .bg-gradient-to-br {
+    background: linear-gradient(to bottom right, #1d1d1f, #000000);
+  }
+  
+  /* Dark mode overrides for text */
+  .dark .text-gray-600 {
+    color: #aeaeb2;
+  }
+  
+  .dark .text-gray-300 {
+    color: #aeaeb2;
+  }
+  
+  /* Dark mode overrides for contact form elements */
+  .dark .bg-white {
+    background-color: #1d1d1f;
+  }
+  
+  .dark .border-gray-100 {
+    border-color: #2c2c2e;
+  }
+  
+  .dark .border-gray-300 {
+    border-color: #424245;
+  }
+  
+  .dark .text-gray-900 {
+    color: #f5f5f7;
+  }
+  
+  /* Dark mode overrides for success and error messages */
+  .dark .bg-green-100 {
+    background-color: #003b1d;
+  }
+  
+  .dark .border-green-300 {
+    border-color: #007a3d;
+  }
+  
+  .dark .text-green-700 {
+    color: #30db7a;
+  }
+  
+  .dark .bg-red-100 {
+    background-color: #3b0000;
+  }
+  
+  .dark .border-red-300 {
+    border-color: #7a0000;
+  }
+  
+  .dark .text-red-700 {
+    color: #db3030;
+  }
+  
+  /* Dark mode overrides for icons */
+  .dark .bg-primary-100 {
+    background-color: #002d5e;
+  }
+  
+  .dark .bg-green-100 {
+    background-color: #003b1d;
+  }
+  
+  .dark .bg-purple-100 {
+    background-color: #2e003e;
   }
 }

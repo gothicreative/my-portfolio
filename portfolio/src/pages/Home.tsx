@@ -14,6 +14,7 @@ import {
 import { SiMongodb, SiExpress, SiTypescript } from 'react-icons/si';
 import { SAMPLE_PROJECTS } from '../utils/constants';
 import MatrixCodeFlow from '../components/MatrixCodeFlow';
+import AppleButton from '../components/AppleButton';
 
 const Home: React.FC = () => {
   const featuredProjects = SAMPLE_PROJECTS.filter(project => project.featured);
@@ -33,11 +34,11 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="space-y-16">
+    <div className="space-y-20">
       {/* Hero Section */}
       <section className="section-padding min-h-screen flex items-center bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
         <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div
               initial="hidden"
               animate="visible"
@@ -51,16 +52,16 @@ const Home: React.FC = () => {
             >
               <motion.h1
                 variants={fadeInUpVariants}
-                className="text-5xl lg:text-6xl font-display font-bold mb-6"
+                className="text-5xl lg:text-6xl font-display font-bold mb-6 leading-tight"
               >
                 Full-Stack {''} 
                 <span className="text-gradient">MERN Developer</span>
-                {' '}& Digital Artist
+                {' '}& Digital Art`s
               </motion.h1>
               
               <motion.p
                 variants={fadeInUpVariants}
-                className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-lg"
+                className="text-xl text-gray-600 dark:text-gray-300 mb-10 max-w-lg leading-relaxed"
               >
                 Creating innovative web and mobile solutions with the MERN stack and React Native, 
                 enhanced by creative digital artistry that makes every project unique.
@@ -68,20 +69,16 @@ const Home: React.FC = () => {
 
               <motion.div
                 variants={fadeInUpVariants}
-                className="flex flex-wrap gap-4 mb-8"
+                className="flex flex-wrap gap-4 mb-12"
               >
-                <Link to="/contact" className="btn-primary">
+                <AppleButton variant="primary" as={Link} to="/contact">
                   Let's Work Together
                   <FaArrowRight className="ml-2" />
-                </Link>
-                <a 
-                  href="HafizAdemCV.pdf" 
-                  download="HafizAdemCV.pdf"
-                  className="btn-outline inline-flex items-center"
-                >
+                </AppleButton>
+                <AppleButton variant="secondary" as="a" href="HafizAdemCV.pdf" download="HafizAdemCV.pdf">
                   <FaDownload className="mr-2" />
                   Download Resume
-                </a>
+                </AppleButton>
               </motion.div>
 
               {/* Tech Stack Icons */}
@@ -92,8 +89,9 @@ const Home: React.FC = () => {
                 {techStack.map((tech) => (
                   <motion.div
                     key={tech.name}
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    className="flex items-center space-x-2 bg-white dark:bg-gray-800 p-3 rounded-lg shadow-sm"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    className="flex items-center space-x-2 bg-white dark:bg-gray-800 p-3 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700"
                   >
                     <tech.icon className={`w-6 h-6 ${tech.color}`} />
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -106,12 +104,12 @@ const Home: React.FC = () => {
 
             {/* Matrix Code Flow Animation */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
               className="relative"
             >
-              <div className="relative w-full h-96 lg:h-[600px] bg-black rounded-2xl overflow-hidden">
+              <div className="relative w-full h-96 lg:h-[600px] bg-black rounded-3xl overflow-hidden shadow-2xl">
                 {/* Matrix Canvas Container */}
                 <div className="absolute inset-0">
                   <MatrixCodeFlow />
@@ -169,18 +167,18 @@ const Home: React.FC = () => {
       </section>
 
       {/* Featured Projects Section */}
-      <section className="section-padding">
+      <section className="section-padding bg-gray-50 dark:bg-gray-900/50">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
             <h2 className="text-4xl font-display font-bold mb-4">
               Featured Projects
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
               A showcase of full-stack web applications, mobile apps, and creative projects 
               that demonstrate my expertise in modern development technologies.
             </p>
@@ -194,10 +192,10 @@ const Home: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -5 }}
-                className="card group cursor-pointer"
+                whileHover={{ y: -8 }}
+                className="card group cursor-pointer apple-transition"
               >
-                <div className="aspect-video bg-gray-200 rounded-lg mb-4 overflow-hidden">
+                <div className="aspect-video bg-gray-200 rounded-xl mb-4 overflow-hidden">
                   <img
                     src={project.imageUrl}
                     alt={project.title}
