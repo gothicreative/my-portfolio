@@ -34,9 +34,9 @@ import type { ContactFormData } from '../types';
 //
 // After getting your credentials, replace the placeholder values below:
 const EMAILJS_CONFIG = {
-  SERVICE_ID: 'your_service_id',      // Replace with your actual Service ID
-  TEMPLATE_ID: 'your_template_id',    // Replace with your actual Template ID
-  PUBLIC_KEY: 'your_public_key'       // Replace with your actual Public Key
+  SERVICE_ID: 'service_kstr8y9',      // Replace with your actual Service ID
+  TEMPLATE_ID: 'template_9lv6kne',    // Replace with your actual Template ID
+  PUBLIC_KEY: 'oSHps1N7r2Hja8VD2'       // Replace with your actual Public Key
 };
 
 const Contact: React.FC = () => {
@@ -264,24 +264,28 @@ const Contact: React.FC = () => {
                     </label>
                     <input
                       type="text"
-                      {...register('name', { required: 'Name is required' })}
                       className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
                         errors.name ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                       }`}
                       placeholder="Your full name"
-                      name="from_name"
+                      {...register('name', { required: 'Name is required' })}
+                      required
                     />
                     {errors.name && (
                       <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
                     )}
                   </div>
-                  
+                
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                       Email *
                     </label>
                     <input
                       type="email"
+                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
+                        errors.email ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
+                      }`}
+                      placeholder="your@email.com"
                       {...register('email', { 
                         required: 'Email is required',
                         pattern: {
@@ -289,11 +293,7 @@ const Contact: React.FC = () => {
                           message: 'Invalid email address'
                         }
                       })}
-                      className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
-                        errors.email ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
-                      }`}
-                      placeholder="your@email.com"
-                      name="reply_to"
+                      required
                     />
                     {errors.email && (
                       <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
@@ -303,7 +303,7 @@ const Contact: React.FC = () => {
 
                 {/* Project Type */}
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                     Project Type *
                   </label>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -347,12 +347,12 @@ const Contact: React.FC = () => {
                   </label>
                   <input
                     type="text"
-                    {...register('subject', { required: 'Subject is required' })}
                     className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
                       errors.subject ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                     }`}
                     placeholder="Brief description of your project"
-                    name="subject"
+                    {...register('subject', { required: 'Subject is required' })}
+                    required
                   />
                   {errors.subject && (
                     <p className="mt-1 text-sm text-red-600">{errors.subject.message}</p>
@@ -366,9 +366,8 @@ const Contact: React.FC = () => {
                       Budget Range
                     </label>
                     <select
-                      {...register('budget')}
                       className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                      name="budget"
+                      {...register('budget')}
                     >
                       <option value="">Select budget range</option>
                       <option value="<5k">Under $5,000</option>
@@ -384,9 +383,8 @@ const Contact: React.FC = () => {
                       Timeline
                     </label>
                     <select
-                      {...register('timeline')}
                       className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                      name="timeline"
+                      {...register('timeline')}
                     >
                       <option value="">Select timeline</option>
                       <option value="asap">ASAP</option>
@@ -404,13 +402,13 @@ const Contact: React.FC = () => {
                     Message *
                   </label>
                   <textarea
-                    {...register('message', { required: 'Message is required' })}
                     rows={6}
                     className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors resize-vertical bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
                       errors.message ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
                     }`}
                     placeholder="Tell me about your project, goals, and any specific requirements..."
-                    name="message"
+                    {...register('message', { required: 'Message is required' })}
+                    required
                   />
                   {errors.message && (
                     <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
@@ -518,7 +516,7 @@ const Contact: React.FC = () => {
                   </div>
                   <div className="flex items-center justify-between">
                     <span className="text-gray-700 dark:text-gray-300">Consultation</span>
-                    <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
+                    <span className="px-3 py-1 bg-blue-100 text-blue-8800 rounded-full text-sm font-medium">
                       Free 30min
                     </span>
                   </div>
