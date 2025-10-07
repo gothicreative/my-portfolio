@@ -23,49 +23,55 @@ const MatrixCodeFlow: React.FC<MatrixCodeFlowProps> = ({ className = '' }) => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Matrix characters (including some coding symbols)
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*(){}[]<>/+=~`|\\';
+    // Matrix characters with more variety for a richer effect
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*(){}[]<>/+=~`|\\abcdefghijklmnopqrstuvwxyz';
     const charArray = chars.split('');
 
-    const fontSize = 14;
+    const fontSize = 16;
     const columns = canvas.width / fontSize;
 
     // Array to store the y position of each column
     const drops: number[] = [];
     for (let i = 0; i < columns; i++) {
-      drops[i] = 1;
+      drops[i] = Math.random() * -100; // Start above the viewport for a more natural flow
     }
 
-    // Animation function
+    // Animation function with enhanced visual effects
     const draw = () => {
-      // Semi-transparent black background to create fade effect
-      context.fillStyle = 'rgba(0, 0, 0, 0.04)';
+      // Semi-transparent black overlay for trail effect
+      context.fillStyle = 'rgba(0, 0, 0, 0.05)';
       context.fillRect(0, 0, canvas.width, canvas.height);
 
-      context.fillStyle = '#0f0'; // Green color
-      context.font = `${fontSize}px monospace`;
+      // Draw "Hafiz" in the top-right corner
+      context.fillStyle = '#0f0'; // Bright green color
+      context.font = 'bold 20px monospace';
+      context.fillText('Hafiz', canvas.width - 80, 30);
 
-      // Loop through drops
+      // Draw characters with varying brightness
       for (let i = 0; i < drops.length; i++) {
         // Random character
         const text = charArray[Math.floor(Math.random() * charArray.length)];
         
+        // Varying brightness for depth effect - brighter at the head of the stream
+        const brightness = Math.floor(Math.random() * 155) + 100; // 100-255
+        context.fillStyle = `rgb(0, ${brightness}, 0)`;
+        context.font = `bold ${fontSize}px monospace`;
+
         // Draw character
-        context.fillStyle = `rgba(0, 255, 0, ${Math.random() * 0.8 + 0.2})`;
         context.fillText(text, i * fontSize, drops[i] * fontSize);
 
-        // Reset drop to top randomly
+        // Reset drop randomly or when it goes off screen
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
+          drops[i] = Math.random() * -50; // Reset above the viewport
         }
 
-        // Increment y position
-        drops[i]++;
+        // Increment y position with varying speeds for a more natural effect
+        drops[i] += Math.random() * 0.5 + 0.5;
       }
     };
 
-    // Start animation
-    const interval = setInterval(draw, 35);
+    // Start animation with a faster frame rate for smoother effect
+    const interval = setInterval(draw, 33); // ~30fps
 
     // Cleanup
     return () => {

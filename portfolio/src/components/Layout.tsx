@@ -17,9 +17,9 @@ const Layout: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-black">
       <Header isScrolled={isScrolled} currentSection="" />
-      <main className="flex-grow pt-20">
+      <main className="flex-grow">
         <Outlet />
       </main>
       <Footer />

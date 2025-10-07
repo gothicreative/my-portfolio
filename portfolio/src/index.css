@@ -16,7 +16,7 @@
     -moz-osx-font-smoothing: grayscale;
     margin: 0;
     min-height: 100vh;
-    background-color: #ffffff;
+    background-color: #000000;
     transition: background-color 0.3s ease, color 0.3s ease;
   }
   
@@ -191,6 +191,95 @@
   }
 }
 
+/* Matrix theme overrides */
+@layer components {
+  .btn-primary {
+    background-color: #059669; /* green-700 */
+    color: white;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(16, 185, 129, 0.3); /* green-500 with opacity */
+    cursor: pointer;
+    font-family: 'Fira Code', monospace;
+  }
+  
+  .btn-primary:hover {
+    background-color: #047857; /* green-600 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    transform: translateY(-1px);
+  }
+  
+  .btn-primary:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+  
+  .btn-secondary {
+    background-color: #111827; /* gray-900 */
+    color: #6ee7b7; /* green-300 */
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(16, 185, 129, 0.3); /* green-500 with opacity */
+    font-family: 'Fira Code', monospace;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #1f2937; /* gray-800 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  }
+  
+  .btn-outline {
+    border: 1px solid rgba(16, 185, 129, 0.5); /* green-500 with more opacity */
+    color: #6ee7b7; /* green-300 */
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.75rem;
+    transition: all 0.2s cubic-bezier(0.25, 0.1, 0.25, 1);
+    background-color: transparent;
+    font-family: 'Fira Code', monospace;
+  }
+  
+  .btn-outline:hover {
+    background-color: rgba(6, 95, 70, 0.3); /* green-900 with opacity */
+    color: #6ee7b7; /* green-300 */
+    box-shadow: 0 4px 8px rgba(16, 185, 129, 0.2);
+  }
+  
+  .card {
+    background-color: #111827; /* gray-900 */
+    border-radius: 1.25rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    padding: 1.75rem;
+    transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    border: 1px solid rgba(16, 185, 129, 0.2); /* green-500 with opacity */
+  }
+  
+  .card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    transform: translateY(-2px);
+    border-color: rgba(16, 185, 129, 0.4); /* green-500 with more opacity */
+  }
+  
+  .tech-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.375rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    background-color: #1f2937; /* gray-800 */
+    color: #6ee7b7; /* green-300 */
+    border: 1px solid rgba(16, 185, 129, 0.3); /* green-500 with opacity */
+    font-family: 'Fira Code', monospace;
+  }
+}
+
 /* Dark mode component overrides */
 @layer components {
   .dark body {
@@ -199,66 +288,68 @@
   }
   
   .dark .card {
-    background-color: #1d1d1f;
-    border-color: #2c2c2e;
+    background-color: #111827; /* gray-900 */
+    border-color: rgba(16, 185, 129, 0.2); /* green-500 with opacity */
   }
   
   .dark .btn-primary {
-    background-color: #0a84ff;
+    background-color: #059669; /* green-700 */
     color: #ffffff;
+    border-color: rgba(16, 185, 129, 0.3); /* green-500 with opacity */
   }
   
   .dark .btn-primary:hover {
-    background-color: #0a7cff;
-    box-shadow: 0 4px 8px rgba(10, 132, 255, 0.3);
+    background-color: #047857; /* green-600 */
+    box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
   }
   
   .dark .btn-secondary {
-    background-color: #2c2c2e;
-    color: #f5f5f7;
-    border-color: #424245;
+    background-color: #111827; /* gray-900 */
+    color: #6ee7b7; /* green-300 */
+    border-color: rgba(16, 185, 129, 0.3); /* green-500 with opacity */
   }
   
   .dark .btn-secondary:hover {
-    background-color: #3a3a3c;
+    background-color: #1f2937; /* gray-800 */
   }
   
   .dark .btn-outline {
-    border-color: #0a84ff;
-    color: #0a84ff;
+    border-color: rgba(16, 185, 129, 0.5); /* green-500 with more opacity */
+    color: #6ee7b7; /* green-300 */
   }
   
   .dark .btn-outline:hover {
-    background-color: #0a84ff;
-    color: #ffffff;
-    box-shadow: 0 4px 8px rgba(10, 132, 255, 0.3);
+    background-color: rgba(6, 95, 70, 0.3); /* green-900 with opacity */
+    color: #6ee7b7; /* green-300 */
+    box-shadow: 0 4px 8px rgba(16, 185, 129, 0.3);
   }
   
   .dark .tech-badge {
-    background-color: #2c2c2e;
-    color: #f5f5f7;
-    border-color: #424245;
+    background-color: #1f2937; /* gray-800 */
+    color: #6ee7b7; /* green-300 */
+    border-color: rgba(16, 185, 129, 0.3); /* green-500 with opacity */
   }
   
   /* Dark mode overrides for form elements */
   .dark input,
   .dark textarea,
   .dark select {
-    background-color: #1d1d1f;
-    color: #f5f5f7;
-    border-color: #424245;
+    background-color: #111827; /* gray-900 */
+    color: #6ee7b7; /* green-300 */
+    border-color: rgba(16, 185, 129, 0.3); /* green-500 with opacity */
+    font-family: 'Fira Code', monospace;
   }
   
   .dark input:focus,
   .dark textarea:focus,
   .dark select:focus {
-    border-color: #0a84ff;
-    box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.3);
+    border-color: #10b981; /* green-500 */
+    box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.3);
   }
   
   /* Dark mode overrides for header */
   .dark .bg-white\/95 {
-    background-color: rgba(29, 29, 31, 0.95);
+    background-color: rgba(0, 0, 0, 0.8);
   }
   
   .dark .text-gray-700 {
@@ -266,51 +357,51 @@
   }
   
   .dark .hover\:bg-gray-100:hover {
-    background-color: #2c2c2e;
+    background-color: #1f2937; /* gray-800 */
   }
   
   /* Dark mode overrides for mobile menu */
   .dark .bg-white\/95 {
-    background-color: rgba(29, 29, 31, 0.95);
+    background-color: rgba(0, 0, 0, 0.8);
   }
   
   .dark .border-gray-200 {
-    border-color: #424245;
+    border-color: rgba(16, 185, 129, 0.2); /* green-500 with opacity */
   }
   
   .dark .hover\:bg-gray-50:hover {
-    background-color: #2c2c2e;
+    background-color: #1f2937; /* gray-800 */
   }
   
   /* Dark mode overrides for sections */
   .dark .bg-gray-50 {
-    background-color: #1d1d1f;
+    background-color: #111827; /* gray-900 */
   }
   
   .dark .bg-gradient-to-br {
-    background: linear-gradient(to bottom right, #1d1d1f, #000000);
+    background: linear-gradient(to bottom right, #111827, #000000);
   }
   
   /* Dark mode overrides for text */
   .dark .text-gray-600 {
-    color: #aeaeb2;
+    color: #9ca3af; /* gray-400 */
   }
   
   .dark .text-gray-300 {
-    color: #aeaeb2;
+    color: #6ee7b7; /* green-300 */
   }
   
   /* Dark mode overrides for contact form elements */
   .dark .bg-white {
-    background-color: #1d1d1f;
+    background-color: #111827; /* gray-900 */
   }
   
   .dark .border-gray-100 {
-    border-color: #2c2c2e;
+    border-color: #1f2937; /* gray-800 */
   }
   
   .dark .border-gray-300 {
-    border-color: #424245;
+    border-color: rgba(16, 185, 129, 0.3); /* green-500 with opacity */
   }
   
   .dark .text-gray-900 {
@@ -319,39 +410,39 @@
   
   /* Dark mode overrides for success and error messages */
   .dark .bg-green-100 {
-    background-color: #003b1d;
+    background-color: #064e3b; /* green-900 */
   }
   
   .dark .border-green-300 {
-    border-color: #007a3d;
+    border-color: #10b981; /* green-500 */
   }
   
   .dark .text-green-700 {
-    color: #30db7a;
+    color: #6ee7b7; /* green-300 */
   }
   
   .dark .bg-red-100 {
-    background-color: #3b0000;
+    background-color: #7f1d1d; /* red-900 */
   }
   
   .dark .border-red-300 {
-    border-color: #7a0000;
+    border-color: #ef4444; /* red-500 */
   }
   
   .dark .text-red-700 {
-    color: #db3030;
+    color: #fca5a5; /* red-300 */
   }
   
   /* Dark mode overrides for icons */
   .dark .bg-primary-100 {
-    background-color: #002d5e;
+    background-color: #064e3b; /* green-900 */
   }
   
   .dark .bg-green-100 {
-    background-color: #003b1d;
+    background-color: #064e3b; /* green-900 */
   }
   
   .dark .bg-purple-100 {
-    background-color: #2e003e;
+    background-color: #4c1d95; /* purple-900 */
   }
 }

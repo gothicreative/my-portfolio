@@ -37,7 +37,7 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled || isMenuOpen
-          ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-lg'
+          ? 'bg-black/80 backdrop-blur-md shadow-lg border-b border-green-500/20'
           : 'bg-transparent'
       }`}
     >
@@ -47,9 +47,9 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
           <Link to="/" className="flex items-center space-x-2">
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="text-2xl font-display font-bold text-gradient"
+              className="text-2xl font-display font-bold text-green-400 font-mono"
             >
-              Hafiz Adem
+              &gt; Hafiz Adem
             </motion.div>
           </Link>
 
@@ -59,17 +59,17 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
               <Link
                 key={item.name}
                 to={item.href}
-                className={`relative font-medium transition-colors duration-200 ${
+                className={`relative font-medium transition-colors duration-200 font-mono ${
                   isActiveRoute(item.href)
-                    ? 'text-primary-600'
-                    : 'text-gray-700 dark:text-gray-300 hover:text-primary-600'
+                    ? 'text-green-400'
+                    : 'text-green-300 hover:text-green-400'
                 }`}
               >
                 {item.name}
                 {isActiveRoute(item.href) && (
                   <motion.div
                     layoutId="activeTab"
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary-600"
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-green-400"
                   />
                 )}
               </Link>
@@ -79,8 +79,8 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
           {/* Theme Toggle & CTA */}
           <div className="hidden md:flex items-center space-x-4">
             <ThemeToggle />
-            <Link to="/contact" className="btn-primary">
-              Let's Talk
+            <Link to="/contact" className="btn-primary bg-green-700 hover:bg-green-600 text-white font-mono">
+              &gt; Connect
             </Link>
           </div>
 
@@ -91,8 +91,8 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
               onClick={toggleMenu}
               className={`p-2 rounded-lg transition-colors ${
                 isMenuOpen 
-                  ? 'bg-gray-100 dark:bg-gray-800 text-primary-600 dark:text-primary-400'
-                  : 'hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-700 dark:text-gray-300'
+                  ? 'bg-gray-900 text-green-400'
+                  : 'hover:bg-gray-900 text-green-300'
               }`}
               aria-label="Toggle menu"
             >
@@ -113,7 +113,7 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
               animate={{ opacity: 1, height: 'auto', y: 0 }}
               exit={{ opacity: 0, height: 0, y: -10 }}
               transition={{ duration: 0.3, ease: 'easeInOut' }}
-              className="md:hidden mt-4 py-4 border-t border-gray-200 dark:border-gray-700 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md rounded-lg shadow-lg -mx-4 px-4"
+              className="md:hidden mt-4 py-4 border-t border-green-500/20 bg-black/80 backdrop-blur-md rounded-lg shadow-lg -mx-4 px-4"
             >
               <motion.div 
                 className="flex flex-col space-y-4"
@@ -140,10 +140,10 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
                     <Link
                       to={item.href}
                       onClick={closeMenu}
-                      className={`font-medium transition-colors duration-200 py-2 px-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-800 block ${
+                      className={`font-medium transition-colors duration-200 py-2 px-3 rounded-lg hover:bg-gray-900 block font-mono ${
                         isActiveRoute(item.href)
-                          ? 'text-primary-600 bg-primary-50 dark:bg-primary-900/20'
-                          : 'text-gray-700 dark:text-gray-300 hover:text-primary-600'
+                          ? 'text-green-400 bg-green-900/20'
+                          : 'text-green-300 hover:text-green-400'
                       }`}
                     >
                       {item.name}
@@ -160,9 +160,9 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
                   <Link
                     to="/contact"
                     onClick={closeMenu}
-                    className="btn-primary self-start mt-2"
+                    className="btn-primary self-start mt-2 bg-green-700 hover:bg-green-600 text-white font-mono"
                   >
-                    Let's Talk
+                    &gt; Connect
                   </Link>
                 </motion.div>
               </motion.div>

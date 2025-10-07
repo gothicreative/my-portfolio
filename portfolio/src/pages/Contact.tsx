@@ -23,6 +23,7 @@ import {
 } from 'react-icons/fa';
 import { CONTACT_INFO } from '../utils/constants';
 import type { ContactFormData } from '../types';
+import MatrixCodeFlow from '../components/MatrixCodeFlow';
 
 // ⚠️ IMPORTANT: REPLACE THESE PLACEHOLDER VALUES WITH YOUR ACTUAL EMAILJS CREDENTIALS
 // 
@@ -30,14 +31,19 @@ import type { ContactFormData } from '../types';
 // 1. Sign up at https://www.emailjs.com/
 // 2. Create an email service and note the Service ID
 // 3. Create an email template and note the Template ID
+//    ⚠️ Make sure you're using the CORRECT Template ID from your dashboard
 // 4. Get your Public Key from Account → API Keys
+//    ⚠️ Make sure you're using the PUBLIC KEY, NOT the private key
 //
 // After getting your credentials, replace the placeholder values below:
 const EMAILJS_CONFIG = {
-  SERVICE_ID: 'service_kstr8y9',      // Replace with your actual Service ID
-  TEMPLATE_ID: 'template_9lv6kne',    // Replace with your actual Template ID
-  PUBLIC_KEY: 'oSHps1N7r2Hja8VD2'       // Replace with your actual Public Key
+  SERVICE_ID: 'service_kstr8y9',      // Replace with your actual Service ID\n
+  TEMPLATE_ID: 'template_9lv6kne',    // Replace with your actual Template ID (check dashboard)
+  PUBLIC_KEY: 'oSHps1N7r2Hja8VD2'       // Replace with your actual PUBLIC Key (NOT private key)
 };
+
+
+
 
 const Contact: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -55,18 +61,18 @@ const Contact: React.FC = () => {
 
   const projectType = watch('projectType');
 
-  const onSubmit = async () => {
+  const onSubmit = async (_data: ContactFormData) => {
     setIsSubmitting(true);
     setSubmitStatus('idle');
     setSubmitMessage('');
 
     try {
       // Check if EmailJS is properly configured
-      if (EMAILJS_CONFIG.SERVICE_ID === 'your_service_id' || 
-          EMAILJS_CONFIG.TEMPLATE_ID === 'your_template_id' || 
+      if (EMAILJS_CONFIG.SERVICE_ID === 'your_service_id' && 
+          EMAILJS_CONFIG.TEMPLATE_ID === 'your_template_id' &&
           EMAILJS_CONFIG.PUBLIC_KEY === 'your_public_key') {
-        // Show a more helpful error message with setup instructions
-        throw new Error('EmailJS not properly configured. Please follow the setup instructions in EMAILJS_SETUP.md');
+        // This means the user hasn't updated the configuration yet
+        throw new Error('EmailJS not properly configured. Please update the configuration with your actual EmailJS credentials.');
       }
 
       // EmailJS configuration
@@ -87,13 +93,13 @@ const Contact: React.FC = () => {
       
       // More specific error messages
       if (error.message && error.message.includes('EmailJS not properly configured')) {
-        setSubmitMessage('EmailJS not properly configured. Please check EMAILJS_SETUP.md for setup instructions.');
+        setSubmitMessage('EmailJS not properly configured. Please update the configuration with your actual EmailJS credentials.');
       } else if (error.text === 'Unauthorized') {
         setSubmitMessage('EmailJS authentication failed. Please check your Public Key.');
       } else if (error.text === 'Bad Request') {
         setSubmitMessage('EmailJS request failed. Please check your Service ID and Template ID.');
       } else {
-        setSubmitMessage(`Error: ${error.text || error.message || `Unknown error occurred. Please try again or contact me directly at ${CONTACT_INFO.email}`}`);
+        setSubmitMessage('Error: ' + (error.text || error.message || `Unknown error occurred. Please try again or contact me directly at ${CONTACT_INFO.email}`));
       }
     } finally {
       setIsSubmitting(false);
@@ -114,7 +120,7 @@ const Contact: React.FC = () => {
       label: 'Web Development', 
       icon: FaCode, 
       description: 'Full-stack web applications using MERN stack',
-      color: '#3B82F6'
+      color: '#10B981'
     },
     { 
       value: 'mobile-app', 
@@ -128,21 +134,21 @@ const Contact: React.FC = () => {
       label: 'Full-Stack Solution', 
       icon: FaRocket, 
       description: 'Complete web + mobile ecosystem',
-      color: '#8B5CF6'
+      color: '#10B981'
     },
     { 
       value: 'illustration', 
       label: 'Digital Design', 
       icon: FaPalette, 
       description: 'UI/UX design and digital illustrations',
-      color: '#F59E0B'
+      color: '#10B981'
     },
     { 
       value: 'consultation', 
       label: 'Technical Consultation', 
       icon: FaCode, 
       description: 'Architecture review and technical guidance',
-      color: '#EF4444'
+      color: '#10B981'
     }
   ];
 
@@ -152,9 +158,19 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <div className="space-y-20">
+    <div className="space-y-20 bg-black min-h-screen relative">
+      {/* Matrix Background */}
+      <div className="fixed inset-0 z-0">
+        <MatrixCodeFlow />
+      </div>
+      
+      {/* Background blur overlay */}
+      <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-10"></div>
+      
+      {/* Content overlay */}
+      <div className="relative z-20">
       {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
+      <section className="section-padding">
         <div className="container-custom">
           <motion.div
             initial="hidden"
@@ -170,15 +186,14 @@ const Contact: React.FC = () => {
           >
             <motion.h1
               variants={fadeInUpVariants}
-              className="text-5xl font-bold mb-6"
+              className="text-5xl font-bold mb-6 text-green-400 font-mono"
             >
-              Let's{' '}
-              <span className="text-gradient">Connect</span>
+              &gt; Let's Connect
             </motion.h1>
             
             <motion.p
               variants={fadeInUpVariants}
-              className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto leading-relaxed"
+              className="text-xl text-green-300 mb-8 max-w-3xl mx-auto leading-relaxed font-mono"
             >
               Ready to bring your ideas to life? Whether you need a full-stack web application, 
               a mobile app, or creative digital solutions, I'm here to help you succeed.
@@ -188,299 +203,319 @@ const Contact: React.FC = () => {
               variants={fadeInUpVariants}
               className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16"
             >
-              <div className="text-center p-6 rounded-2xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
-                <div className="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <FaClock className="w-8 h-8 text-primary-600" />
+              <div className="text-center p-6 rounded-2xl bg-gray-900/80 border border-green-500/20">
+                <div className="w-16 h-16 bg-green-900/30 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-green-500/30">
+                  <FaClock className="w-8 h-8 text-green-400" />
                 </div>
-                <h3 className="text-lg font-semibold mb-2 dark:text-white">Quick Response</h3>
-                <p className="text-gray-600 dark:text-gray-300">Usually respond within 24 hours</p>
+                <h3 className="text-lg font-semibold mb-2 text-green-300 font-mono">Quick Response</h3>
+                <p className="text-green-200 font-mono">Usually respond within 24 hours</p>
               </div>
               
-              <div className="text-center p-6 rounded-2xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
-                <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <FaRocket className="w-8 h-8 text-green-600" />
+              <div className="text-center p-6 rounded-2xl bg-gray-900/80 border border-green-500/20">
+                <div className="w-16 h-16 bg-green-900/30 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-green-500/30">
+                  <FaRocket className="w-8 h-8 text-green-400" />
                 </div>
-                <h3 className="text-lg font-semibold mb-2 dark:text-white">Fast Development</h3>
-                <p className="text-gray-600 dark:text-gray-300">Agile development with quick iterations</p>
+                <h3 className="text-lg font-semibold mb-2 text-green-300 font-mono">Fast Development</h3>
+                <p className="text-green-200 font-mono">Agile development with quick iterations</p>
               </div>
               
-              <div className="text-center p-6 rounded-2xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
-                <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <FaDollarSign className="w-8 h-8 text-purple-600" />
+              <div className="text-center p-6 rounded-2xl bg-gray-900/80 border border-green-500/20">
+                <div className="w-16 h-16 bg-green-900/30 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-green-500/30">
+                  <FaDollarSign className="w-8 h-8 text-green-400" />
                 </div>
-                <h3 className="text-lg font-semibold mb-2 dark:text-white">Fair Pricing</h3>
-                <p className="text-gray-600 dark:text-gray-300">Transparent, competitive rates</p>
+                <h3 className="text-lg font-semibold mb-2 text-green-300 font-mono">Fair Pricing</h3>
+                <p className="text-green-200 font-mono">Transparent, competitive rates</p>
               </div>
             </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* Contact Form & Info */}
+      {/* Contact Form Section */}
       <section className="section-padding">
         <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="card"
-            >
-              <h2 className="text-3xl font-bold mb-6 dark:text-white">Send Me a Message</h2>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto"
+          >
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4 text-green-400 font-mono">&gt; Get In Touch</h2>
+              <p className="text-xl text-green-300 max-w-2xl mx-auto font-mono">
+                Have a project in mind or want to discuss potential opportunities? 
+                I'd love to hear from you. Fill out the form below and I'll get back to you as soon as possible.
+              </p>
+            </div>
+
+            <form ref={formRef} onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+              {/* Hidden fields for EmailJS template */}
+              <input
+                type="hidden"
+                name="to_email"
+                value={CONTACT_INFO.email}
+              />
+              <input
+                type="hidden"
+                name="to_name"
+                value="Hafiz Adem"
+              />
               
-              {/* Submit Status Messages */}
-              {submitStatus === 'success' && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="mb-6 p-4 bg-green-100 border border-green-300 rounded-2xl flex items-start"
-                >
-                  <FaCheckCircle className="w-5 h-5 text-green-600 mt-0.5 mr-3 flex-shrink-0" />
-                  <p className="text-green-700 dark:text-green-300">{submitMessage}</p>
-                </motion.div>
-              )}
-              
-              {submitStatus === 'error' && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="mb-6 p-4 bg-red-100 border border-red-300 rounded-2xl flex items-start"
-                >
-                  <FaExclamationTriangle className="w-5 h-5 text-red-600 mt-0.5 mr-3 flex-shrink-0" />
-                  <p className="text-red-700 dark:text-red-300">{submitMessage}</p>
-                </motion.div>
-              )}
-
-              <form ref={formRef} onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                {/* Hidden fields for EmailJS template */}
-                <input type="hidden" name="to_email" value={CONTACT_INFO.email} />
-                <input type="hidden" name="to_name" value="Hafiz Adem" />
-                
-                {/* Basic Info */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Name *
-                    </label>
-                    <input
-                      type="text"
-                      className={`w-full px-4 py-3 border rounded-2xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
-                        errors.name ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
-                      }`}
-                      placeholder="Your full name"
-                      {...register('name', { required: 'Name is required' })}
-                      required
-                    />
-                    {errors.name && (
-                      <p className="mt-1 text-sm text-red-600">{errors.name.message}</p>
-                    )}
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Email *
-                    </label>
-                    <input
-                      type="email"
-                      className={`w-full px-4 py-3 border rounded-2xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
-                        errors.email ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
-                      }`}
-                      placeholder="your@email.com"
-                      {...register('email', { 
-                        required: 'Email is required',
-                        pattern: {
-                          value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                          message: 'Invalid email address'
-                        }
-                      })}
-                      required
-                    />
-                    {errors.email && (
-                      <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
-                    )}
-                  </div>
-                </div>
-
-                {/* Project Type */}
+              {/* Basic Info */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Project Type *
-                  </label>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {projectTypes.map((type) => (
-                      <label
-                        key={type.value}
-                        className={`relative cursor-pointer p-4 border rounded-2xl transition-all ${
-                          projectType === type.value
-                            ? 'border-primary-500 bg-primary-50 dark:bg-primary-900/20'
-                            : 'border-gray-200 dark:border-gray-600 hover:border-gray-300 dark:hover:border-gray-500'
-                        }`}
-                      >
-                        <input
-                          type="radio"
-                          {...register('projectType', { required: 'Please select a project type' })}
-                          value={type.value}
-                          className="sr-only"
-                        />
-                        <div className="flex items-start">
-                          <type.icon 
-                            className="w-5 h-5 mt-0.5 mr-3 flex-shrink-0" 
-                            style={{ color: type.color }}
-                          />
-                          <div>
-                            <div className="font-medium text-gray-900 dark:text-white">{type.label}</div>
-                            <div className="text-sm text-gray-600 dark:text-gray-300">{type.description}</div>
-                          </div>
-                        </div>
-                      </label>
-                    ))}
-                  </div>
-                  {errors.projectType && (
-                    <p className="mt-1 text-sm text-red-600">{errors.projectType.message}</p>
-                  )}
-                </div>
-
-                {/* Subject */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Subject *
+                  <label className="block text-sm font-medium text-green-300 mb-2 font-mono">
+                    Name *
                   </label>
                   <input
                     type="text"
-                    className={`w-full px-4 py-3 border rounded-2xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
-                      errors.subject ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
+                    className={`w-full px-4 py-3 border rounded-2xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors bg-gray-900 text-green-300 border-green-500/30 font-mono ${
+                      errors.name ? 'border-red-500' : ''
+                    }`}
+                    placeholder="Your full name"
+                    {...register('name', { required: 'Name is required' })}
+                  />
+                  {errors.name && (
+                    <p className="mt-1 text-sm text-red-500 font-mono">{errors.name.message}</p>
+                  )}
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-green-300 mb-2 font-mono">
+                    Email *
+                  </label>
+                  <input
+                    type="email"
+                    className={`w-full px-4 py-3 border rounded-2xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors bg-gray-900 text-green-300 border-green-500/30 font-mono ${
+                      errors.email ? 'border-red-500' : ''
+                    }`}
+                    placeholder="your@email.com"
+                    {...register('email', { 
+                      required: 'Email is required',
+                      pattern: {
+                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        message: 'Invalid email address'
+                      }
+                    })}
+                  />
+                  {errors.email && (
+                    <p className="mt-1 text-sm text-red-500 font-mono">{errors.email.message}</p>
+                  )}
+                </div>
+              </div>
+
+              {/* Project Type */}
+              <div>
+                <label className="block text-sm font-medium text-green-300 mb-2 font-mono">
+                  Project Type *
+                </label>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {projectTypes.map((type) => (
+                    <label
+                      key={type.value}
+                      className={`relative cursor-pointer p-4 border rounded-2xl transition-all font-mono ${
+                        projectType === type.value
+                          ? 'border-green-500 bg-green-900/20'
+                          : 'border-green-500/30 hover:border-green-500/50 bg-gray-900'
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        {...register('projectType', { required: 'Please select a project type' })}
+                        value={type.value}
+                        className="sr-only"
+                      />
+                      <div className="flex items-start">
+                        <type.icon 
+                          className="w-5 h-5 mt-0.5 mr-3 flex-shrink-0 text-green-400" 
+                        />
+                        <div>
+                          <div className="font-medium text-green-300">{type.label}</div>
+                          <div className="text-sm text-green-200">{type.description}</div>
+                        </div>
+                      </div>
+                    </label>
+                  ))}
+                </div>
+                {errors.projectType && (
+                  <p className="mt-1 text-sm text-red-500 font-mono">{errors.projectType.message}</p>
+                )}
+              </div>
+
+              {/* Subject */}
+              <div>
+                <label className="block text-sm font-medium text-green-300 mb-2 font-mono">
+                  Subject *
+                </label>
+                <input
+                  type="text"
+                  className={`w-full px-4 py-3 border rounded-2xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors bg-gray-900 text-green-300 border-green-500/30 font-mono ${
+                      errors.subject ? 'border-red-500' : ''
                     }`}
                     placeholder="Brief description of your project"
                     {...register('subject', { required: 'Subject is required' })}
-                    required
                   />
-                  {errors.subject && (
-                    <p className="mt-1 text-sm text-red-600">{errors.subject.message}</p>
-                  )}
-                </div>
+                {errors.subject && (
+                  <p className="mt-1 text-sm text-red-500 font-mono">{errors.subject.message}</p>
+                )}
+              </div>
 
-                {/* Additional Info */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Budget Range
-                    </label>
-                    <select
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-2xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                      {...register('budget')}
-                      >
-                      <option value="">Select budget range</option>
-                      <option value="<5k">Under $5,000</option>
-                      <option value="5k-10k">$5,000 - $10,000</option>
-                      <option value="10k-25k">$10,000 - $25,000</option>
-                      <option value="25k+">$25,000+</option>
-                      <option value="discuss">Let's discuss</option>
-                    </select>
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Timeline
-                    </label>
-                    <select
-                      className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-2xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
-                      {...register('timeline')}
-                      >
-                      <option value="">Select timeline</option>
-                      <option value="asap">ASAP</option>
-                      <option value="1-2weeks">1-2 weeks</option>
-                      <option value="1month">1 month</option>
-                      <option value="2-3months">2-3 months</option>
-                      <option value="flexible">Flexible</option>
-                    </select>
-                  </div>
-                </div>
-
-                {/* Message */}
+              {/* Additional Info */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                    Message *
+                  <label className="block text-sm font-medium text-green-300 mb-2 font-mono">
+                    Budget Range
                   </label>
-                  <textarea
-                    rows={6}
-                    className={`w-full px-4 py-3 border rounded-2xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors resize-vertical bg-white dark:bg-gray-800 text-gray-900 dark:text-white ${
-                      errors.message ? 'border-red-300' : 'border-gray-300 dark:border-gray-600'
+                  <select
+                    className="w-full px-4 py-3 border border-green-500/30 rounded-2xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors bg-gray-900 text-green-300 font-mono"
+                    {...register('budget')}
+                  >
+                    <option value="">Select budget range</option>
+                    <option value="<5k">Under $5,000</option>
+                    <option value="5k-10k">$5,000 - $10,000</option>
+                    <option value="10k-25k">$10,000 - $25,000</option>
+                    <option value="25k+">$25,000+</option>
+                    <option value="discuss">Let's discuss</option>
+                  </select>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-green-300 mb-2 font-mono">
+                    Timeline
+                  </label>
+                  <select
+                    className="w-full px-4 py-3 border border-green-500/30 rounded-2xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors bg-gray-900 text-green-300 font-mono"
+                    {...register('timeline')}
+                  >
+                    <option value="">Select timeline</option>
+                    <option value="asap">ASAP</option>
+                    <option value="1-2weeks">1-2 weeks</option>
+                    <option value="1month">1 month</option>
+                    <option value="2-3months">2-3 months</option>
+                    <option value="flexible">Flexible</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Message */}
+              <div>
+                <label className="block text-sm font-medium text-green-300 mb-2 font-mono">
+                  Message *
+                </label>
+                <textarea
+                  rows={6}
+                  className={`w-full px-4 py-3 border rounded-2xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors resize-vertical bg-gray-900 text-green-300 border-green-500/30 font-mono ${
+                      errors.message ? 'border-red-500' : ''
                     }`}
                     placeholder="Tell me about your project, goals, and any specific requirements..."
                     {...register('message', { required: 'Message is required' })}
-                    required
                   />
-                  {errors.message && (
-                    <p className="mt-1 text-sm text-red-600">{errors.message.message}</p>
+                {errors.message && (
+                  <p className="mt-1 text-sm text-red-500 font-mono">{errors.message.message}</p>
+                )}
+              </div>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full btn-primary bg-green-700 hover:bg-green-600 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed rounded-2xl font-mono"
+              >
+                {isSubmitting ? (
+                  <>
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
+                    &gt; Sending...
+                  </>
+                ) : (
+                  <>
+                    <FaPaperPlane className="w-5 h-5 mr-2" />
+                    &gt; Send Message
+                  </>
+                )}
+              </button>
+              
+              {/* Submit Status Messages */}
+              {submitStatus !== 'idle' && (
+                <div className={`p-4 rounded-2xl border font-mono ${
+                  submitStatus === 'success' 
+                    ? 'bg-green-900/30 border-green-500/30 text-green-300' 
+                    : 'bg-red-900/30 border-red-500/30 text-red-300'
+                }`}>
+                  {submitStatus === 'success' ? (
+                    <div className="flex items-center">
+                      <FaCheckCircle className="w-5 h-5 mr-2" />
+                      {submitMessage}
+                    </div>
+                  ) : (
+                    <div className="flex items-center">
+                      <FaExclamationTriangle className="w-5 h-5 mr-2" />
+                      {submitMessage}
+                    </div>
                   )}
                 </div>
+              )}
+            </form>
+          </motion.div>
+        </div>
+      </section>
 
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full btn-primary flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed rounded-2xl"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2" />
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      <FaPaperPlane className="w-5 h-5 mr-2" />
-                      Send Message
-                    </>
-                  )}
-                </button>
-              </form>
-            </motion.div>
+      {/* Contact Info Section */}
+      <section className="section-padding">
+        <div className="container-custom">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto"
+          >
+            <div className="text-center mb-12">
+              <h2 className="text-4xl font-bold mb-4 text-green-400 font-mono">&gt; Contact Information</h2>
+              <p className="text-xl text-green-300 max-w-2xl mx-auto font-mono">
+                Prefer direct communication? Here are my contact details and preferred channels.
+              </p>
+            </div>
 
             {/* Contact Information */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="space-y-8"
-            >
-              <div className="card">
-                <h3 className="text-2xl font-bold mb-6 dark:text-white">Get in Touch</h3>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="card bg-gray-900/80 border border-green-500/20">
+                <h3 className="text-2xl font-bold mb-6 text-green-300 font-mono">&gt; Get in Touch</h3>
                 
                 <div className="space-y-4">
-                  <div className="flex items-center p-4 rounded-2xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
-                    <div className="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mr-4">
-                      <FaEnvelope className="w-6 h-6 text-primary-600" />
+                  <div className="flex items-center p-4 rounded-2xl bg-gray-800 border border-green-500/20">
+                    <div className="w-12 h-12 bg-green-900/30 rounded-xl flex items-center justify-center mr-4 border border-green-500/30">
+                      <FaEnvelope className="w-6 h-6 text-green-400" />
                     </div>
                     <div>
-                      <div className="font-medium text-gray-900 dark:text-white">Email</div>
-                      <div className="text-gray-600 dark:text-gray-300">{CONTACT_INFO.email}</div>
+                      <div className="font-medium text-green-300 font-mono">Email</div>
+                      <div className="text-green-200 font-mono">{CONTACT_INFO.email}</div>
                     </div>
                   </div>
                   
-                  <div className="flex items-center p-4 rounded-2xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
-                    <div className="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mr-4">
-                      <FaPhone className="w-6 h-6 text-green-600" />
+                  <div className="flex items-center p-4 rounded-2xl bg-gray-800 border border-green-500/20">
+                    <div className="w-12 h-12 bg-green-900/30 rounded-xl flex items-center justify-center mr-4 border border-green-500/30">
+                      <FaPhone className="w-6 h-6 text-green-400" />
                     </div>
                     <div>
-                      <div className="font-medium text-gray-900 dark:text-white">Phone</div>
-                      <div className="text-gray-600 dark:text-gray-300">{CONTACT_INFO.phone}</div>
+                      <div className="font-medium text-green-300 font-mono">Phone</div>
+                      <div className="text-green-200 font-mono">{CONTACT_INFO.phone}</div>
                     </div>
                   </div>
                   
-                  <div className="flex items-center p-4 rounded-2xl bg-white dark:bg-gray-800 shadow-sm border border-gray-100 dark:border-gray-700">
-                    <div className="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mr-4">
-                      <FaMapMarkerAlt className="w-6 h-6 text-purple-600" />
+                  <div className="flex items-center p-4 rounded-2xl bg-gray-800 border border-green-500/20">
+                    <div className="w-12 h-12 bg-green-900/30 rounded-xl flex items-center justify-center mr-4 border border-green-500/30">
+                      <FaMapMarkerAlt className="w-6 h-6 text-green-400" />
                     </div>
                     <div>
-                      <div className="font-medium text-gray-900 dark:text-white">Location</div>
-                      <div className="text-gray-600 dark:text-gray-300">{CONTACT_INFO.location}</div>
+                      <div className="font-medium text-green-300 font-mono">Location</div>
+                      <div className="text-green-200 font-mono">{CONTACT_INFO.location}</div>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Social Links */}
-              <div className="card">
-                <h3 className="text-xl font-bold mb-4 dark:text-white">Follow Me</h3>
+              <div className="card bg-gray-900/80 border border-green-500/20">
+                <h3 className="text-xl font-bold mb-4 text-green-300 font-mono">&gt; Follow Me</h3>
                 <div className="flex space-x-4">
                   {socialLinks.map((social) => (
                     <motion.a
@@ -490,42 +525,42 @@ const Contact: React.FC = () => {
                       rel="noopener noreferrer"
                       whileHover={{ scale: 1.1, y: -2 }}
                       whileTap={{ scale: 0.95 }}
-                      className="w-12 h-12 rounded-xl flex items-center justify-center shadow-md hover:shadow-lg transition-shadow"
-                      style={{ backgroundColor: `${social.color}15` }}
+                      className="w-12 h-12 rounded-xl flex items-center justify-center shadow-md hover:shadow-lg transition-shadow border border-green-500/30 bg-gray-800"
                       aria-label={social.label}
                     >
-                      <social.icon className="w-6 h-6" style={{ color: social.color }} />
+                      <social.icon className="w-6 h-6 text-green-400" />
                     </motion.a>
                   ))}
                 </div>
               </div>
 
               {/* Availability */}
-              <div className="card">
-                <h3 className="text-xl font-bold mb-4 dark:text-white">Current Availability</h3>
+              <div className="card bg-gray-900/80 border border-green-500/20">
+                <h3 className="text-xl font-bold mb-4 text-green-300 font-mono">&gt; Current Availability</h3>
                 <div className="space-y-3">
-                  <div className="flex items-center justify-between p-3 rounded-xl bg-white dark:bg-gray-800">
-                    <span className="text-gray-700 dark:text-gray-300">New Projects</span>
-                    <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">
+                  <div className="flex items-center justify-between p-3 rounded-xl bg-gray-800 border border-green-500/20">
+                    <span className="text-green-300 font-mono">New Projects</span>
+                    <span className="px-3 py-1 bg-green-900/50 text-green-300 rounded-full text-sm font-medium border border-green-500/30 font-mono">
                       Available
                     </span>
                   </div>
-                  <div className="flex items-center justify-between p-3 rounded-xl bg-white dark:bg-gray-800">
-                    <span className="text-gray-700 dark:text-gray-300">Response Time</span>
-                    <span className="text-gray-600 dark:text-gray-400 text-sm">Within 24 hours</span>
+                  <div className="flex items-center justify-between p-3 rounded-xl bg-gray-800 border border-green-500/20">
+                    <span className="text-green-300 font-mono">Response Time</span>
+                    <span className="text-green-200 text-sm font-mono">Within 24 hours</span>
                   </div>
-                  <div className="flex items-center justify-between p-3 rounded-xl bg-white dark:bg-gray-800">
-                    <span className="text-gray-700 dark:text-gray-300">Consultation</span>
-                    <span className="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
+                  <div className="flex items-center justify-between p-3 rounded-xl bg-gray-800 border border-green-500/20">
+                    <span className="text-green-300 font-mono">Consultation</span>
+                    <span className="px-3 py-1 bg-green-900/50 text-green-300 rounded-full text-sm font-medium border border-green-500/30 font-mono">
                       Free 30min
                     </span>
                   </div>
                 </div>
               </div>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </div>
       </section>
+      </div>
     </div>
   );
 };
