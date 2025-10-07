@@ -29,15 +29,15 @@ class ErrorBoundary extends React.Component<
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="min-h-screen flex items-center justify-center bg-black">
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-gray-900 mb-4">Something went wrong</h1>
-            <p className="text-gray-600 mb-4">Please refresh the page to try again.</p>
+            <h1 className="text-2xl font-bold text-green-400 mb-4 font-mono">&gt; Something went wrong</h1>
+            <p className="text-green-300 mb-4 font-mono">Please refresh the page to try again.</p>
             <button 
               onClick={() => window.location.reload()} 
-              className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700"
+              className="bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-600 font-mono"
             >
-              Refresh Page
+              &gt; Refresh Page
             </button>
           </div>
         </div>
@@ -54,12 +54,12 @@ const router = createBrowserRouter([
     path: "/",
     element: <Layout />,
     errorElement: (
-      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="min-h-screen flex items-center justify-center bg-black">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Page Not Found</h1>
-          <p className="text-gray-600 mb-4">The page you're looking for doesn't exist.</p>
-          <a href="/" className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700">
-            Go Home
+          <h1 className="text-2xl font-bold text-green-400 mb-4 font-mono">&gt; Page Not Found</h1>
+          <p className="text-green-300 mb-4 font-mono">The page you're looking for doesn't exist.</p>
+          <a href="/" className="bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-600 font-mono">
+            &gt; Go Home
           </a>
         </div>
       </div>

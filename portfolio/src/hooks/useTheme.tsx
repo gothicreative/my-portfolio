@@ -5,14 +5,23 @@ type Theme = 'light' | 'dark';
 interface ThemeContextType {
   theme: Theme;
   toggleTheme: () => void;
+  isHomePage: boolean;
+  setIsHomePage: (isHome: boolean) => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>('light');
+  const [theme, setTheme] = useState<Theme>('dark'); // Default to dark mode
+  const [isHomePage, setIsHomePage] = useState<boolean>(false);
 
   useEffect(() => {
+    // For home page, always use dark mode
+    if (isHomePage) {
+      setTheme('dark');
+      return;
+    }
+    
     // Check localStorage first, then system preference
     const savedTheme = localStorage.getItem('theme') as Theme | null;
     if (savedTheme && (savedTheme === 'light' || savedTheme === 'dark')) {
@@ -22,11 +31,13 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       setTheme(prefersDark ? 'dark' : 'light');
     }
-  }, []);
+  }, [isHomePage]);
 
   useEffect(() => {
-    // Save theme to localStorage
-    localStorage.setItem('theme', theme);
+    // Save theme to localStorage (except for home page)
+    if (!isHomePage) {
+      localStorage.setItem('theme', theme);
+    }
     
     // Apply theme to document
     if (theme === 'dark') {
@@ -34,14 +45,17 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     } else {
       document.documentElement.classList.remove('dark');
     }
-  }, [theme]);
+  }, [theme, isHomePage]);
 
   const toggleTheme = () => {
+    // Don't allow theme toggle on home page
+    if (isHomePage) return;
+    
     setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, toggleTheme, isHomePage, setIsHomePage }}>
       {children}
     </ThemeContext.Provider>
   );

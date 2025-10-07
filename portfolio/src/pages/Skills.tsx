@@ -24,6 +24,10 @@ import {
   FaPlay,
   FaPause
 } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import MatrixCodeFlow from '../components/MatrixCodeFlow';
+import Footer from '../components/Footer';
+
 const Skills: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('mern');
   const [isAnimating, setIsAnimating] = useState(false);
@@ -278,59 +282,39 @@ const Skills: React.FC = () => {
   };
 
   return (
-    <div className="space-y-16">
+    <div className="space-y-16 bg-black min-h-screen relative">
+      {/* Matrix Background */}
+      <div className="fixed inset-0 z-0">
+        <MatrixCodeFlow />
+      </div>
+      
+      {/* Semi-transparent overlay for better text readability */}
+      <div className="fixed inset-0 bg-black/70 z-10"></div>
+      
+      {/* Content overlay */}
+      <div className="relative z-20">
       {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
+      <section className="section-padding bg-gradient-to-br from-black via-black/90 to-green-900/20">
         <div className="container-custom">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={{
-              hidden: { opacity: 0 },
-              visible: {
-                opacity: 1,
-                transition: { staggerChildren: 0.2 }
-              }
-            }}
-            className="text-center"
-          >
+          <div className="max-w-4xl mx-auto text-center">
             <motion.h1
-              variants={fadeInUpVariants}
-              className="text-5xl font-bold mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-5xl font-bold mb-6 text-green-400 font-mono"
             >
-              Technical{' '}
-              <span className="text-gradient">Expertise</span>
+              &gt; My Skills
             </motion.h1>
             
             <motion.p
-              variants={fadeInUpVariants}
-              className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="text-xl text-green-300 mb-10 max-w-2xl mx-auto font-mono"
             >
-              Explore my comprehensive skill set in modern web development, mobile applications, 
-              and creative design tools. See how I leverage the MERN stack to build scalable, 
-              performant applications.
+              A comprehensive overview of my technical expertise, creative abilities, and 
+              professional proficiencies across multiple domains of development and design.
             </motion.p>
-
-            <motion.div
-              variants={fadeInUpVariants}
-              className="flex flex-wrap justify-center gap-2 md:gap-4"
-            >
-              {categories.map((category) => (
-                <button
-                  key={category.id}
-                  onClick={() => setSelectedCategory(category.id)}
-                  className={`flex items-center space-x-2 px-3 py-2 md:px-6 md:py-3 rounded-lg font-medium transition-all duration-200 text-sm md:text-base ${
-                    selectedCategory === category.id
-                      ? 'bg-primary-600 text-white shadow-lg'
-                      : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-md'
-                  }`}
-                >
-                  <category.icon className="w-5 h-5" />
-                  <span>{category.name}</span>
-                </button>
-              ))}
-            </motion.div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -343,21 +327,21 @@ const Skills: React.FC = () => {
               animate={{ opacity: 1, y: 0 }}
               className="text-center mb-12"
             >
-              <h2 className="text-4xl font-bold mb-4">MERN Stack Flow</h2>
-              <p className="text-xl text-gray-600 mb-6">
+              <h2 className="text-4xl font-bold mb-4 text-green-400 font-mono">&gt; MERN Stack Flow</h2>
+              <p className="text-xl text-green-300 mb-6 font-mono">
                 Interactive visualization of how MongoDB, Express, React, and Node.js work together
               </p>
               <button
                 onClick={startAnimation}
-                className="btn-primary"
+                className="btn-primary bg-green-700 hover:bg-green-600 font-mono"
               >
                 {isAnimating ? <FaPause className="mr-2" /> : <FaPlay className="mr-2" />}
-                {isAnimating ? 'Pause Animation' : 'Start Data Flow Animation'}
+                {isAnimating ? '&gt; Pause Animation' : '&gt; Start Data Flow Animation'}
               </button>
             </motion.div>
 
             {/* MERN Flow Diagram */}
-            <div className="relative h-48 md:h-64 mb-16 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 md:p-8 overflow-hidden">
+            <div className="relative h-48 md:h-64 mb-16 bg-gray-900/80 rounded-xl shadow-lg p-4 md:p-8 overflow-hidden border border-green-500/20">
               <svg className="absolute inset-0 w-full h-full">
                 {/* Connection Lines */}
                 {mernFlow.map((tech) =>
@@ -372,13 +356,13 @@ const Skills: React.FC = () => {
                         y1={tech.position.y + 40}
                         x2={target.position.x + 40}
                         y2={target.position.y + 40}
-                        stroke="#E5E7EB"
+                        stroke="#10B981"
                         strokeWidth="2"
                         strokeDasharray="5,5"
                         initial={{ pathLength: 0 }}
                         animate={{ 
                           pathLength: isAnimating ? 1 : 0.3,
-                          stroke: isAnimating ? '#3B82F6' : '#E5E7EB'
+                          stroke: isAnimating ? '#10B981' : '#10B981'
                         }}
                         transition={{ duration: 2, repeat: isAnimating ? Infinity : 0 }}
                       />
@@ -390,7 +374,7 @@ const Skills: React.FC = () => {
                 {isAnimating && (
                   <motion.circle
                     r="3"
-                    fill="#F59E0B"
+                    fill="#10B981"
                     initial={{ 
                       cx: mernFlow[0].position.x + 40, 
                       cy: mernFlow[0].position.y + 40 
@@ -412,7 +396,7 @@ const Skills: React.FC = () => {
                 return (
                   <motion.div
                     key={tech.id}
-                    className={`mern-node absolute ${nodeSize} bg-white dark:bg-gray-700 rounded-xl shadow-lg flex flex-col items-center justify-center cursor-pointer border-2 border-transparent hover:border-blue-300 dark:hover:border-blue-500 transition-all`}
+                    className={`mern-node absolute ${nodeSize} bg-gray-800 rounded-xl shadow-lg flex flex-col items-center justify-center cursor-pointer border-2 border-green-500/30 hover:border-green-400 transition-all`}
                     style={{
                       left: `${tech.position.x}px`,
                       top: `${tech.position.y}px`,
@@ -428,7 +412,7 @@ const Skills: React.FC = () => {
                     onClick={() => isMobile && setSelectedSkill(selectedSkill === tech.id ? null : tech.id)}
                   >
                     <tech.icon className={`${iconSize} mb-1`} style={{ color: tech.color }} />
-                    <span className="text-xs font-medium text-center text-gray-700 dark:text-gray-300 leading-tight">
+                    <span className="text-xs font-medium text-center text-green-300 leading-tight font-mono">
                       {isMobile ? tech.name.split(' ')[0] : tech.name}
                     </span>
                     
@@ -439,10 +423,10 @@ const Skills: React.FC = () => {
                           initial={{ opacity: 0, y: -10 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -10 }}
-                          className={`absolute ${isMobile ? '-bottom-20' : '-top-16'} left-1/2 transform -translate-x-1/2 bg-gray-900 dark:bg-gray-700 text-white px-3 py-2 rounded-lg text-sm z-10 max-w-48 text-center shadow-lg`}
+                          className={`absolute ${isMobile ? '-bottom-20' : '-top-16'} left-1/2 transform -translate-x-1/2 bg-gray-900 border border-green-500/30 text-green-300 px-3 py-2 rounded-lg text-sm z-10 max-w-48 text-center shadow-lg font-mono`}
                         >
                           {tech.description}
-                          <div className={`absolute ${isMobile ? 'bottom-full' : 'top-full'} left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 ${isMobile ? 'border-b-4 border-b-gray-900 dark:border-b-gray-700' : 'border-t-4 border-t-gray-900 dark:border-t-gray-700'} border-transparent`} />
+                          <div className={`absolute ${isMobile ? 'bottom-full' : 'top-full'} left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-4 border-r-4 ${isMobile ? 'border-b-4 border-b-green-500/30' : 'border-t-4 border-t-green-500/30'} border-transparent`} />
                         </motion.div>
                       )}
                     </AnimatePresence>
@@ -454,8 +438,48 @@ const Skills: React.FC = () => {
         </section>
       )}
 
+      {/* Skills Categories */}
+      <section className="section-padding bg-black/50 backdrop-blur-sm">
+        <div className="container-custom">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold mb-4 text-green-400 font-mono">&gt; Technical Expertise</h2>
+            <p className="text-xl text-green-300 max-w-2xl mx-auto font-mono">
+              Specialized in modern web and mobile technologies with a focus on creating scalable, 
+              performant applications that provide exceptional user experiences.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="flex flex-wrap justify-center gap-2 md:gap-4"
+          >
+            {categories.map((category) => (
+              <button
+                key={category.id}
+                onClick={() => setSelectedCategory(category.id)}
+                className={`flex items-center space-x-2 px-3 py-2 md:px-6 md:py-3 rounded-lg font-medium transition-all duration-200 text-sm md:text-base font-mono ${
+                  selectedCategory === category.id
+                    ? 'bg-green-700 text-white shadow-lg border border-green-500/30'
+                    : 'bg-gray-900 text-green-300 hover:bg-gray-800 border border-green-500/20 shadow-md'
+                }`}
+              >
+                <category.icon className="w-5 h-5" />
+                <span>&gt; {category.name}</span>
+              </button>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
       {/* Skills Grid */}
-      <section className="section-padding bg-white dark:bg-gray-900">
+      <section className="section-padding bg-black/70 backdrop-blur-sm">
         <div className="container-custom">
           <motion.div
             key={selectedCategory}
@@ -463,8 +487,8 @@ const Skills: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h2 className="text-4xl font-bold text-center mb-12">
-              {categories.find(c => c.id === selectedCategory)?.name} Skills
+            <h2 className="text-4xl font-bold text-center mb-12 text-green-400 font-mono">
+              &gt; {categories.find(c => c.id === selectedCategory)?.name} Skills
             </h2>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
@@ -476,16 +500,16 @@ const Skills: React.FC = () => {
                   transition={{ delay: index * 0.05, duration: 0.3 }}
                   whileHover={{ y: isMobile ? -2 : -5 }}
                   whileTap={{ scale: 0.98 }}
-                  className="card group cursor-pointer"
+                  className="card group cursor-pointer bg-gray-900/80 border border-green-500/20"
                 >
                   <div className="flex items-center mb-4">
-                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg flex items-center justify-center mr-3 md:mr-4 group-hover:scale-110 transition-transform">
+                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg flex items-center justify-center mr-3 md:mr-4 group-hover:scale-110 transition-transform border border-green-500/30 bg-gray-800">
                       <skill.icon className="w-6 h-6 md:w-8 md:h-8" style={{ color: skill.color }} />
                     </div>
                     <div className="flex-1">
-                      <h3 className="text-base md:text-lg font-semibold">{skill.name}</h3>
+                      <h3 className="text-base md:text-lg font-semibold text-green-300 font-mono">{skill.name}</h3>
                       <div className="flex items-center mt-1">
-                        <div className="flex-1 bg-gray-200 dark:bg-gray-600 rounded-full h-1.5 md:h-2 mr-2 md:mr-3">
+                        <div className="flex-1 bg-gray-800 rounded-full h-1.5 md:h-2 mr-2 md:mr-3">
                           <motion.div
                             initial={{ width: 0 }}
                             animate={{ width: `${skill.level}%` }}
@@ -494,11 +518,11 @@ const Skills: React.FC = () => {
                             style={{ backgroundColor: skill.color }}
                           />
                         </div>
-                        <span className="text-xs md:text-sm font-medium text-gray-600 dark:text-gray-400">{skill.level}%</span>
+                        <span className="text-xs md:text-sm font-medium text-green-300 font-mono">{skill.level}%</span>
                       </div>
                     </div>
                   </div>
-                  <p className="text-gray-600 dark:text-gray-400 text-xs md:text-sm">{skill.description}</p>
+                  <p className="text-green-200 text-xs md:text-sm font-mono">{skill.description}</p>
                 </motion.div>
               ))}
             </div>
@@ -506,27 +530,67 @@ const Skills: React.FC = () => {
         </div>
       </section>
 
-      {/* Technology Ecosystem */}
-      <section className="section-padding bg-gray-50 dark:bg-gray-800">
+      {/* Skill Progress Visualization */}
+      <section className="section-padding bg-black/50 backdrop-blur-sm">
         <div className="container-custom">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold mb-4">Technology Ecosystem</h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              How different technologies complement each other in my development workflow
+            <h2 className="text-4xl font-bold mb-4 text-green-400 font-mono">&gt; Skill Proficiency</h2>
+            <p className="text-xl text-green-300 max-w-2xl mx-auto font-mono">
+              Visual representation of my expertise levels across various technologies and tools.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            {skillCategories.mern.map((skill) => (
+              <motion.div
+                key={skill.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ delay: skill.level * 0.01 }}
+                className="card bg-gray-900/80 border border-green-500/20"
+              >
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg flex items-center justify-center mb-3 md:mb-4 group-hover:scale-110 transition-transform border border-green-500/30 bg-gray-800">
+                  <skill.icon className="w-6 h-6 md:w-8 md:h-8" style={{ color: skill.color }} />
+                </div>
+                <div className="flex items-center mb-2">
+                  <span className="text-base md:text-lg font-semibold text-green-300 font-mono">{skill.name}</span>
+                  <span className="text-sm font-medium text-green-300 ml-2 font-mono">{skill.level}%</span>
+                </div>
+                <p className="text-green-200 text-sm font-mono">{skill.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Tools & Technologies */}
+      <section className="section-padding">
+        <div className="container-custom">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold mb-4 text-green-400 font-mono">&gt; Development Tools</h2>
+            <p className="text-xl text-green-300 max-w-2xl mx-auto font-mono">
+              Essential tools and platforms I use in my development workflow to ensure 
+              efficiency, quality, and collaboration.
             </p>
           </motion.div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
             {[
-              { title: 'Frontend', icon: SiReact, color: '#61DAFB', techs: ['React', 'TypeScript', 'Tailwind'] },
-              { title: 'Backend', icon: SiNodedotjs, color: '#339933', techs: ['Node.js', 'Express', 'APIs'] },
-              { title: 'Database', icon: SiMongodb, color: '#47A248', techs: ['MongoDB', 'PostgreSQL', 'Design'] },
-              { title: 'Mobile', icon: FaMobile, color: '#6366F1', techs: ['React Native', 'Expo', 'Cross-platform'] }
+              { title: 'Version Control', icon: SiGit, color: '#F05032', description: 'Git & GitHub' },
+              { title: 'Containerization', icon: SiDocker, color: '#2496ED', description: 'Docker' },
+              { title: 'Cloud Services', icon: SiAmazon, color: '#FF9900', description: 'AWS' },
+              { title: 'Database Management', icon: SiPostgresql, color: '#336791', description: 'PostgreSQL' }
             ].map((category, index) => (
               <motion.div
                 key={category.title}
@@ -536,48 +600,42 @@ const Skills: React.FC = () => {
                 transition={{ delay: index * 0.05 }}
                 className="text-center"
               >
-                <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl flex items-center justify-center mx-auto mb-3 md:mb-4 group-hover:scale-110 transition-transform"
-                     style={{ backgroundColor: `${category.color}20` }}>
+                <div className="w-12 h-12 md:w-16 md:h-16 rounded-xl flex items-center justify-center mx-auto mb-3 md:mb-4 group-hover:scale-110 transition-transform border border-green-500/30 bg-gray-900/80">
                   <category.icon className="w-6 h-6 md:w-8 md:h-8" style={{ color: category.color }} />
                 </div>
-                <h3 className="text-lg md:text-xl font-semibold mb-2">{category.title}</h3>
-                <ul className="text-gray-600 dark:text-gray-400 space-y-1 text-sm md:text-base">
-                  {category.techs.map((tech) => (
-                    <li key={tech}>{tech}</li>
-                  ))}
-                </ul>
+                <h3 className="text-lg md:text-xl font-semibold mb-2 text-green-300 font-mono">{category.title}</h3>
+                <p className="text-green-200 text-sm font-mono">{category.description}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section className="section-padding bg-primary-600 text-white">
+      {/* CTA Section */}
+      <section className="section-padding bg-gradient-to-r from-green-900/70 to-black backdrop-blur-sm">
         <div className="container-custom text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-bold mb-4">
-              Ready to Build Together?
-            </h2>
-            <p className="text-lg md:text-xl mb-6 md:mb-8 max-w-2xl mx-auto opacity-90">
-              Let's leverage these technologies to create something amazing for your next project.
+            <h2 className="text-4xl font-bold mb-4 text-green-400 font-mono">&gt; Ready to Collaborate?</h2>
+            <p className="text-xl mb-8 max-w-2xl mx-auto text-green-300 font-mono">
+              Let's work together to bring your ideas to life with cutting-edge technology 
+              and creative design solutions.
             </p>
-            <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 md:gap-4">
-              <button className="bg-white text-primary-600 font-medium py-2 px-4 md:py-3 md:px-6 rounded-lg hover:bg-gray-100 transition-colors duration-200 text-sm md:text-base">
-                View My Projects
-                <FaArrowRight className="ml-2 inline" />
-              </button>
-              <button className="border-2 border-white text-white font-medium py-2 px-4 md:py-3 md:px-6 rounded-lg hover:bg-white hover:text-primary-600 transition-all duration-200 text-sm md:text-base">
-                Let's Talk
-              </button>
-            </div>
+            <Link 
+              to="/contact" 
+              className="inline-flex items-center bg-green-700 text-white font-medium py-3 px-6 rounded-lg hover:bg-green-600 transition-colors duration-200 font-mono"
+            >
+              &gt; Start a Project
+              <FaArrowRight className="ml-2" />
+            </Link>
           </motion.div>
         </div>
       </section>
+      </div>
+      <Footer />
     </div>
   );
 };

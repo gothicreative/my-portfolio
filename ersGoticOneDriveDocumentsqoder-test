@@ -1,0 +1,4 @@
+warning: in the working copy of 'portfolio/src/index.css', LF will be replaced by CRLF the next time Git touches it
+ portfolio/src/index.css         | 2 [32m+[m[31m-[m
+ portfolio/src/pages/Contact.tsx | 1 [31m-[m
+ 2 files changed, 1 insertion(+), 2 deletions(-)

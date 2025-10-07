@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { 
   FaBriefcase, 
   FaGraduationCap, 
@@ -11,10 +12,13 @@ import {
   FaUsers,
   FaTrophy,
   FaRocket,
-  FaPalette
+  FaPalette,
+  FaArrowRight
 } from 'react-icons/fa';
 import { SiReact, SiNodedotjs, SiMongodb, SiExpress, SiTypescript } from 'react-icons/si';
 import { SAMPLE_PROJECTS } from '../utils/constants';
+import MatrixCodeFlow from '../components/MatrixCodeFlow';
+import Footer from '../components/Footer';
 
 const Experience: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState<'timeline' | 'projects'>('timeline');
@@ -42,7 +46,7 @@ const Experience: React.FC = () => {
       ],
       technologies: ['React', 'Node.js', 'MongoDB', 'React Native', 'TypeScript', 'AWS'],
       icon: FaBriefcase,
-      color: '#3B82F6'
+      color: '#10B981'
     },
     {
       id: '2',
@@ -60,7 +64,7 @@ const Experience: React.FC = () => {
       ],
       technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Figma', 'Adobe Creative Suite'],
       icon: FaPalette,
-      color: '#8B5CF6'
+      color: '#10B981'
     },
     {
       id: '3',
@@ -96,7 +100,7 @@ const Experience: React.FC = () => {
       ],
       technologies: ['React', 'JavaScript', 'CSS3', 'REST APIs', 'Git'],
       icon: FaCode,
-      color: '#F59E0B'
+      color: '#10B981'
     }
   ];
 
@@ -130,64 +134,42 @@ const Experience: React.FC = () => {
   };
 
   return (
-    <div className="space-y-16">
+    <div className="space-y-16 bg-black min-h-screen relative">
+      {/* Matrix Background */}
+      <div className="fixed inset-0 z-0">
+        <MatrixCodeFlow />
+      </div>
+      
+      {/* Content overlay */}
+      <div className="relative z-20">
       {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-gray-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
+      <section className="section-padding bg-gradient-to-br from-black/80 via-black/70 to-green-900/10">
         <div className="container-custom">
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={{
-              hidden: { opacity: 0 },
-              visible: {
-                opacity: 1,
-                transition: { staggerChildren: 0.2 }
-              }
-            }}
-            className="text-center"
-          >
+          <div className="max-w-4xl mx-auto text-center">
             <motion.h1
-              variants={fadeInUpVariants}
-              className="text-5xl font-bold mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-5xl font-bold mb-6 text-green-400 font-mono"
             >
-              Professional{' '}
-              <span className="text-gradient">Experience</span>
+              &gt; My Experience
             </motion.h1>
             
             <motion.p
-              variants={fadeInUpVariants}
-              className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="text-xl text-green-300 mb-10 max-w-2xl mx-auto font-mono"
             >
-              Explore my journey from learning to leading, featuring the projects and experiences 
-              that shaped my expertise in full-stack development and mobile applications.
+              A journey through professional roles, projects, and achievements that have shaped 
+              my expertise in full-stack development and digital creativity.
             </motion.p>
-
-            <motion.div
-              variants={fadeInUpVariants}
-              className="flex flex-wrap justify-center gap-4"
-            >
-              {tabs.map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setSelectedTab(tab.id as 'timeline' | 'projects')}
-                  className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
-                    selectedTab === tab.id
-                      ? 'bg-primary-600 text-white shadow-lg'
-                      : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-md'
-                  }`}
-                >
-                  <tab.icon className="w-5 h-5" />
-                  <span>{tab.name}</span>
-                </button>
-              ))}
-            </motion.div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Timeline Section */}
       {selectedTab === 'timeline' && (
-        <section className="section-padding">
+        <section className="section-padding bg-black/50 backdrop-blur-sm">
           <div className="container-custom">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -195,7 +177,7 @@ const Experience: React.FC = () => {
               className="relative"
             >
               {/* Timeline Line */}
-              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-700 hidden md:block" />
+              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-green-500/30 hidden md:block" />
               
               <div className="space-y-12">
                 {timelineEvents.map((event, index) => (
@@ -207,45 +189,44 @@ const Experience: React.FC = () => {
                     className="relative flex items-start space-x-6"
                   >
                     {/* Timeline Icon */}
-                    <div className="hidden md:flex w-16 h-16 rounded-full flex-shrink-0 items-center justify-center shadow-lg relative z-10"
-                         style={{ backgroundColor: `${event.color}20` }}>
-                      <event.icon className="w-8 h-8" style={{ color: event.color }} />
+                    <div className="hidden md:flex w-16 h-16 rounded-full flex-shrink-0 items-center justify-center shadow-lg relative z-10 border border-green-500/30 bg-gray-900/80">
+                      <event.icon className="w-8 h-8 text-green-400" />
                     </div>
                     
                     {/* Content Card */}
                     <motion.div
                       whileHover={{ y: -5 }}
-                      className="flex-1 card"
+                      className="flex-1 card bg-gray-900/80 border border-green-500/20"
                     >
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                         <div>
-                          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-1">{event.title}</h3>
-                          <div className="flex items-center text-gray-600 dark:text-gray-400 mb-2">
+                          <h3 className="text-2xl font-bold text-green-300 mb-1 font-mono">{event.title}</h3>
+                          <div className="flex items-center text-green-200 mb-2 font-mono">
                             <FaBriefcase className="w-4 h-4 mr-2" />
                             <span className="font-medium">{event.company}</span>
                             <FaMapMarkerAlt className="w-4 h-4 ml-4 mr-2" />
                             <span>{event.location}</span>
                           </div>
                         </div>
-                        <div className="flex items-center text-gray-500 dark:text-gray-400">
+                        <div className="flex items-center text-green-200 font-mono">
                           <FaCalendarAlt className="w-4 h-4 mr-2" />
                           <span className="font-medium">{event.period}</span>
                         </div>
                       </div>
                       
-                      <p className="text-gray-700 dark:text-gray-300 mb-6">{event.description}</p>
+                      <p className="text-green-200 mb-6 font-mono">{event.description}</p>
                       
                       {/* Achievements */}
                       <div className="mb-6">
-                        <h4 className="text-lg font-semibold mb-3 flex items-center">
-                          <FaTrophy className="w-5 h-5 mr-2 text-yellow-500" />
+                        <h4 className="text-lg font-semibold mb-3 flex items-center text-green-300 font-mono">
+                          <FaTrophy className="w-5 h-5 mr-2 text-green-400" />
                           Key Achievements
                         </h4>
                         <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
                           {event.achievements.map((achievement, idx) => (
-                            <li key={idx} className="flex items-start">
-                              <div className="w-2 h-2 bg-primary-600 rounded-full mt-2 mr-3 flex-shrink-0" />
-                              <span className="text-gray-700 dark:text-gray-300">{achievement}</span>
+                            <li key={idx} className="flex items-start font-mono">
+                              <div className="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3 flex-shrink-0" />
+                              <span className="text-green-200">{achievement}</span>
                             </li>
                           ))}
                         </ul>
@@ -253,13 +234,13 @@ const Experience: React.FC = () => {
                       
                       {/* Technologies */}
                       <div>
-                        <h4 className="text-lg font-semibold mb-3">Technologies Used</h4>
+                        <h4 className="text-lg font-semibold mb-3 text-green-300 font-mono">Technologies Used</h4>
                         <div className="flex flex-wrap gap-2">
                           {event.technologies.map((tech) => {
                             const IconComponent = getTechIcon(tech);
                             return (
-                              <span key={tech} className="tech-badge flex items-center">
-                                <IconComponent className="w-4 h-4 mr-1" />
+                              <span key={tech} className="tech-badge bg-gray-800 text-green-300 border border-green-500/30 font-mono flex items-center">
+                                <IconComponent className="w-4 h-4 mr-1 text-green-400" />
                                 {tech}
                               </span>
                             );
@@ -276,9 +257,21 @@ const Experience: React.FC = () => {
       )}
 
       {/* Projects Section */}
-      {selectedTab === 'projects' && (
-        <section className="section-padding">
-          <div className="container-custom">
+      <section className="section-padding bg-black/50 backdrop-blur-sm">
+        <div className="container-custom">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold mb-4 text-green-400 font-mono">&gt; Featured Projects</h2>
+            <p className="text-xl text-green-300 max-w-2xl mx-auto font-mono">
+              A selection of projects that showcase my technical skills, creativity, and 
+              problem-solving abilities across different domains.
+            </p>
+          </motion.div>
+
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -289,13 +282,13 @@ const Experience: React.FC = () => {
                   <button
                     key={category.id}
                     onClick={() => setSelectedCategory(category.id)}
-                    className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 ${
+                    className={`px-6 py-3 rounded-lg font-medium transition-all duration-200 font-mono ${
                       selectedCategory === category.id
-                        ? 'bg-primary-600 text-white shadow-lg'
-                        : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 shadow-md'
+                        ? 'bg-green-700 text-white shadow-lg border border-green-500/30'
+                        : 'bg-gray-900 text-green-300 hover:bg-gray-800 border border-green-500/20 shadow-md'
                     }`}
                   >
-                    {category.name} ({category.count})
+                    &gt; {category.name} ({category.count})
                   </button>
                 ))}
               </div>
@@ -312,18 +305,18 @@ const Experience: React.FC = () => {
                       exit={{ opacity: 0, scale: 0.9 }}
                       transition={{ delay: index * 0.1 }}
                       whileHover={{ y: -5 }}
-                      className="card group cursor-pointer"
+                      className="card group cursor-pointer bg-gray-900/80 border border-green-500/20"
                       onHoverStart={() => setSelectedProject(project.id)}
                       onHoverEnd={() => setSelectedProject(null)}
                     >
                       {/* Project Image */}
-                      <div className="aspect-video bg-gray-200 rounded-lg mb-4 overflow-hidden relative">
+                      <div className="aspect-video bg-gray-800 rounded-lg mb-4 overflow-hidden relative border border-green-500/20">
                         <img
                           src={project.imageUrl}
                           alt={project.title}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                           onError={(e) => {
-                            e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkltYWdlIE5vdCBGb3VuZDwvdGV4dD48L3N2Zz4=';
+                            e.currentTarget.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjMTExODI3Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxOCIgZmlsbD0iIzllZWJiMiIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkltYWdlIE5vdCBGb3VuZDwvdGV4dD48L3N2Zz4=';
                           }}
                         />
                         
@@ -334,7 +327,7 @@ const Experience: React.FC = () => {
                               initial={{ opacity: 0 }}
                               animate={{ opacity: 1 }}
                               exit={{ opacity: 0 }}
-                              className="absolute inset-0 bg-primary-600/90 flex items-center justify-center"
+                              className="absolute inset-0 bg-green-900/90 flex items-center justify-center border border-green-500/30"
                             >
                               <div className="flex space-x-4">
                                 {project.liveUrl && (
@@ -342,10 +335,10 @@ const Experience: React.FC = () => {
                                     href={project.liveUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="w-12 h-12 bg-white rounded-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
+                                    className="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors border border-green-500/30"
                                     onClick={(e) => e.stopPropagation()}
                                   >
-                                    <FaExternalLinkAlt className="w-5 h-5 text-primary-600" />
+                                    <FaExternalLinkAlt className="w-5 h-5 text-green-400" />
                                   </a>
                                 )}
                                 {project.githubUrl && (
@@ -353,10 +346,10 @@ const Experience: React.FC = () => {
                                     href={project.githubUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="w-12 h-12 bg-white rounded-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
+                                    className="w-12 h-12 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors border border-green-500/30"
                                     onClick={(e) => e.stopPropagation()}
                                   >
-                                    <FaGithub className="w-5 h-5 text-primary-600" />
+                                    <FaGithub className="w-5 h-5 text-green-400" />
                                   </a>
                                 )}
                               </div>
@@ -368,33 +361,27 @@ const Experience: React.FC = () => {
                       {/* Project Info */}
                       <div className="space-y-3">
                         <div className="flex items-center justify-between">
-                          <h3 className="text-xl font-semibold group-hover:text-primary-600 transition-colors">
+                          <h3 className="text-xl font-semibold text-green-300 group-hover:text-green-400 transition-colors font-mono">
                             {project.title}
                           </h3>
-                          <span className={`px-2 py-1 text-xs rounded-full ${
-                            project.platform === 'web' 
-                              ? 'bg-blue-100 text-blue-800'
-                              : project.platform === 'mobile'
-                              ? 'bg-green-100 text-green-800'
-                              : 'bg-purple-100 text-purple-800'
-                          }`}>
+                          <span className="px-2 py-1 text-xs rounded-full bg-green-900/50 text-green-300 border border-green-500/30 font-mono">
                             {project.platform}
                           </span>
                         </div>
                         
-                        <p className="text-gray-600 dark:text-gray-400 text-sm line-clamp-3">
+                        <p className="text-green-200 text-sm line-clamp-3 font-mono">
                           {project.description}
                         </p>
                         
                         {/* Technologies */}
                         <div className="flex flex-wrap gap-2">
                           {project.technologies.slice(0, 3).map((tech) => (
-                            <span key={tech} className="tech-badge">
+                            <span key={tech} className="tech-badge bg-gray-800 text-green-300 border border-green-500/30 font-mono">
                               {tech}
                             </span>
                           ))}
                           {project.technologies.length > 3 && (
-                            <span className="tech-badge">
+                            <span className="tech-badge bg-gray-800 text-green-300 border border-green-500/30 font-mono">
                               +{project.technologies.length - 3} more
                             </span>
                           )}
@@ -402,22 +389,22 @@ const Experience: React.FC = () => {
                         
                         {/* Metrics */}
                         {project.metrics && (
-                          <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 pt-2 border-t border-gray-100 dark:border-gray-700">
+                          <div className="flex items-center text-sm text-green-200 pt-2 border-t border-green-500/20 font-mono">
                             {project.metrics.users && (
                               <div className="flex items-center mr-4">
-                                <FaUsers className="w-4 h-4 mr-1" />
+                                <FaUsers className="w-4 h-4 mr-1 text-green-400" />
                                 <span>{project.metrics.users.toLocaleString()} users</span>
                               </div>
                             )}
                             {project.metrics.downloads && (
                               <div className="flex items-center mr-4">
-                                <FaRocket className="w-4 h-4 mr-1" />
+                                <FaRocket className="w-4 h-4 mr-1 text-green-400" />
                                 <span>{project.metrics.downloads.toLocaleString()} downloads</span>
                               </div>
                             )}
                             {project.metrics.performance && (
                               <div className="flex items-center">
-                                <FaTrophy className="w-4 h-4 mr-1" />
+                                <FaTrophy className="w-4 h-4 mr-1 text-green-400" />
                                 <span>{project.metrics.performance}</span>
                               </div>
                             )}
@@ -431,34 +418,32 @@ const Experience: React.FC = () => {
             </motion.div>
           </div>
         </section>
-      )}
 
-      {/* Call to Action */}
-      <section className="section-padding bg-primary-600 text-white">
+      {/* CTA Section */}
+      <section className="section-padding bg-gradient-to-r from-green-900/70 to-black backdrop-blur-sm">
         <div className="container-custom text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-bold mb-4">
-              Let's Build Something Amazing Together
-            </h2>
-            <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
-              Ready to bring your next project to life? Let's discuss how my experience 
-              can help you achieve your goals.
+            <h2 className="text-4xl font-bold mb-4 text-green-400 font-mono">&gt; Ready to Collaborate?</h2>
+            <p className="text-xl mb-8 max-w-2xl mx-auto text-green-300 font-mono">
+              Let's work together to bring your ideas to life with cutting-edge technology 
+              and creative design solutions.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <button className="bg-white text-primary-600 font-medium py-3 px-6 rounded-lg hover:bg-gray-100 transition-colors duration-200">
-                Start a Project
-              </button>
-              <button className="border-2 border-white text-white font-medium py-3 px-6 rounded-lg hover:bg-white hover:text-primary-600 transition-all duration-200">
-                Download Resume
-              </button>
-            </div>
+            <Link 
+              to="/contact" 
+              className="inline-flex items-center bg-green-700 text-white font-medium py-3 px-6 rounded-lg hover:bg-green-600 transition-colors duration-200 font-mono"
+            >
+              &gt; Start a Project
+              <FaArrowRight className="ml-2" />
+            </Link>
           </motion.div>
         </div>
       </section>
+      </div>
+      <Footer />
     </div>
   );
 };

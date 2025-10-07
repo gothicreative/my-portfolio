@@ -17,12 +17,12 @@ const AppleButton: React.FC<AppleButtonProps> = ({
   as: Component = 'button',
   ...props 
 }) => {
-  const baseClasses = "inline-flex items-center justify-center font-medium rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 disabled:opacity-50 disabled:cursor-not-allowed";
+  const baseClasses = "inline-flex items-center justify-center font-medium rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50 disabled:cursor-not-allowed font-mono";
   
   const variantClasses = {
-    primary: "bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 shadow-sm hover:shadow-md",
-    secondary: "bg-gray-100 hover:bg-gray-200 text-gray-900 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-white px-6 py-3",
-    outline: "border border-blue-600 text-blue-600 hover:bg-blue-50 dark:hover:bg-blue-900/20 px-6 py-3"
+    primary: "bg-green-700 hover:bg-green-600 text-white px-6 py-3 shadow-sm hover:shadow-md border border-green-500/30",
+    secondary: "bg-gray-900 hover:bg-gray-800 text-green-300 dark:bg-gray-900 dark:hover:bg-gray-800 dark:text-green-300 px-6 py-3 border border-green-500/30",
+    outline: "border border-green-500/50 text-green-300 hover:bg-green-900/30 px-6 py-3"
   };
 
   // For link-specific props
