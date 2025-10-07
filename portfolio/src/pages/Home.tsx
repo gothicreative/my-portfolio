@@ -16,10 +16,9 @@ import { SAMPLE_PROJECTS } from '../utils/constants';
 import MatrixCodeFlow from '../components/MatrixCodeFlow';
 import AppleButton from '../components/AppleButton';
 import { useTheme } from '../hooks/useTheme';
-import ThemeToggle from '../components/ThemeToggle';
 
 const Home: React.FC = () => {
-  const { theme, isHomePage, setIsHomePage } = useTheme();
+  const { theme, setIsHomePage } = useTheme();
   
   useEffect(() => {
     // Set this as the home page for theme context
