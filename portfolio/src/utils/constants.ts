@@ -65,6 +65,23 @@ export const SAMPLE_PROJECTS: Project[] = [
     }
   },
   {
+    id: '5',
+    title: 'Typing Speed Test Game',
+    description: 'Full-stack MERN app featuring real-time WPM & accuracy analytics, user accounts, and a global leaderboard.',
+    longDescription: 'A full-stack Typing Speed Test Game built with the MERN stack (MongoDB, Express, React, Node) that features real-time WPM & accuracy analytics, user accounts & a global leaderboard, a responsive UI built with Tailwind CSS, and full deployment on Vercel. This project was a deep dive into connecting all parts of the stack to create a fast, functional, and engaging user experience.',
+    technologies: ['MongoDB', 'Express', 'React', 'Node.js', 'Tailwind CSS', 'Vercel'],
+    imageUrl: '/images/typerocket.png',
+    liveUrl: 'https://type-speed-topaz.vercel.app',
+    githubUrl: 'https://github.com/gothicreative/type-speed',
+    category: 'fullstack',
+    platform: 'web',
+    featured: true,
+    date: '2024-05',
+    metrics: {
+      users: 0
+    }
+  },
+  {
     id: '4',
     title: 'Digital Art Portfolio',
     description: 'Creative showcase combining digital illustration with interactive web design, featuring animated galleries and custom artwork.',
