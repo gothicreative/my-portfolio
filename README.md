@@ -1,45 +1,69 @@
+# React + TypeScript + Vite
 
-[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-> 🚀 **Full-Stack Mobile Developer & Digital Artist** specializing in MERN stack and React Native development, enhanced by creative digital artistry.
+Currently, two official plugins are available:
 
-## ✨ Features
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-- 🎭 **Matrix Code Flow Animation** - Dynamic hero section with falling code effect
-- 🌙 **Dark/Light Mode** - Seamless theme switching with persistence
-- 📱 **Fully Responsive** - Optimized for all devices and screen sizes
-- ⚡ **Performance Optimized** - Built with Vite for lightning-fast loading
-- 🎨 **Modern Animations** - Smooth transitions using Framer Motion
-- 📧 **Contact Form** - Integrated with EmailJS for direct communication
-- 📄 **Resume Download** - One-click PDF resume download
-- 🎯 **SEO Optimized** - Meta tags and semantic HTML structure
+## Expanding the ESLint configuration
 
-## 🛠️ Tech Stack
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-### Frontend
-- **React 19** - Latest React with modern hooks and features
-- **TypeScript** - Type-safe development
-- **Tailwind CSS** - Utility-first CSS framework
-- **Framer Motion** - Advanced animations and interactions
-- **React Router** - Client-side routing
-- **React Icons** - Beautiful icon library
+```js
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-### Development Tools
-- **Vite** - Next-generation frontend tooling
-- **ESLint** - Code linting and quality assurance
-- **PostCSS** - CSS post-processing
-- **Autoprefixer** - CSS vendor prefixing
+      // Remove tseslint.configs.recommended and replace with this
+      ...tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      ...tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      ...tseslint.configs.stylisticTypeChecked,
 
-### Services
-- **EmailJS** - Contact form email integration
-- **Vercel/Netlify** - Deployment platform
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
 
-## 🚀 Quick Start
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/yourusername/portfolio.git
-   cd portfolio
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```

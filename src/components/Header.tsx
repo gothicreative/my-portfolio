@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { HiMenu, HiX } from 'react-icons/hi';
+// import { HiMenu, HiX } from 'react-icons/hi';
 import { NAVIGATION_ITEMS } from '../utils/constants';
-import ThemeToggle from './ThemeToggle';
+// import ThemeToggle from './ThemeToggle';
 
 interface HeaderProps {
   isScrolled: boolean;
@@ -14,9 +14,9 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+  // const toggleMenu = () => {
+  //   setIsMenuOpen(!isMenuOpen);
+  // };
 
   const closeMenu = () => {
     setIsMenuOpen(false);
@@ -78,14 +78,14 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
 
           {/* Theme Toggle & CTA */}
           <div className="hidden md:flex items-center space-x-4">
-            <ThemeToggle />
+            {/* <ThemeToggle /> */}
             <Link to="/contact" className="btn-primary bg-green-700 hover:bg-green-600 text-white font-mono">
               &gt; Connect
             </Link>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center space-x-2">
+          {/* <div className="md:hidden flex items-center space-x-2">
             <ThemeToggle />
             <button
               onClick={toggleMenu}
@@ -102,7 +102,7 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
                 <HiMenu className="w-6 h-6" />
               )}
             </button>
-          </div>
+          </div> */}
         </div>
 
         {/* Mobile Navigation */}
