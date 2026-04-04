@@ -33,85 +33,30 @@ import {
   FaTools
 } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import MatrixCodeFlow from '../components/MatrixCodeFlow';
-import { SKILLS_DATA } from '../utils/constants';
+import { SKILLS_DATA } from '../../utils/constants';
 
-// Icon mapping
 const iconMap: { [key: string]: React.ComponentType<any> } = {
-  SiMongodb,
-  SiExpress,
-  SiReact,
-  SiNodedotjs,
-  SiTypescript,
-  SiJavascript,
-  SiTailwindcss,
-  SiGit,
-  SiDocker,
-  SiAmazon,
-  SiFigma,
-  SiPostgresql,
-  SiAdobeillustrator,
-  SiRedux,
-  SiNextdotjs,
-  SiGraphql,
-  SiPostman,
-  SiExpo,
-  SiVercel,
-  SiAdobephotoshop,
-  SiBlender,
-  FaCode,
-  FaServer,
-  FaMobile,
-  FaDatabase,
-  FaTools,
-  FaPalette
+  SiMongodb, SiExpress, SiReact, SiNodedotjs, SiTypescript, SiJavascript,
+  SiTailwindcss, SiGit, SiDocker, SiAmazon, SiFigma, SiPostgresql,
+  SiAdobeillustrator, SiRedux, SiNextdotjs, SiGraphql, SiPostman,
+  SiExpo, SiVercel, SiAdobephotoshop, SiBlender,
+  FaCode, FaServer, FaMobile, FaDatabase, FaTools, FaPalette
 };
 
-// Color mapping for skills
 const colorMap: { [key: string]: string } = {
-  SiMongodb: '#47A248',
-  SiExpress: '#000000',
-  SiReact: '#61DAFB',
-  SiNodedotjs: '#339933',
-  SiTypescript: '#3178C6',
-  SiJavascript: '#F7DF1E',
-  SiTailwindcss: '#06B6D4',
-  SiGit: '#F05032',
-  SiDocker: '#2496ED',
-  SiAmazon: '#FF9900',
-  SiFigma: '#F24E1E',
-  SiPostgresql: '#336791',
-  SiAdobeillustrator: '#FF9A00',
-  SiRedux: '#764ABC',
-  SiNextdotjs: '#000000',
-  SiGraphql: '#E10098',
-  SiPostman: '#FF6C37',
-  SiExpo: '#000020',
-  SiVercel: '#000000',
-  SiAdobephotoshop: '#31A8FF',
-  SiBlender: '#F5792A',
-  frontend: '#10B981',
-  backend: '#3B82F6',
-  mobile: '#8B5CF6',
-  databases: '#F59E0B',
-  tools: '#EF4444',
-  creative: '#EC4899'
+  SiMongodb: '#47A248', SiExpress: '#000000', SiReact: '#61DAFB',
+  SiNodedotjs: '#339933', SiTypescript: '#3178C6', SiJavascript: '#F7DF1E',
+  SiTailwindcss: '#06B6D4', SiGit: '#F05032', SiDocker: '#2496ED',
+  SiAmazon: '#FF9900', SiFigma: '#F24E1E', SiPostgresql: '#336791',
+  SiAdobeillustrator: '#FF9A00', SiRedux: '#764ABC', SiNextdotjs: '#000000',
+  SiGraphql: '#E10098', SiPostman: '#FF6C37', SiExpo: '#000020',
+  SiVercel: '#000000', SiAdobephotoshop: '#31A8FF', SiBlender: '#F5792A',
+  frontend: '#10B981', backend: '#3B82F6', mobile: '#8B5CF6',
+  databases: '#F59E0B', tools: '#EF4444', creative: '#EC4899'
 };
 
-const Skills: React.FC = () => {
+const SkillsContent: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('frontend');
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Detect mobile screen size
-  React.useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   const categories = [
     { id: 'frontend', name: 'Frontend', icon: FaCode },
@@ -123,17 +68,7 @@ const Skills: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-16 bg-black min-h-screen relative">
-      {/* Matrix Background */}
-      <div className="fixed inset-0 z-0">
-        <MatrixCodeFlow />
-      </div>
-      
-      {/* Background blur overlay */}
-      <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-10"></div>
-      
-      {/* Content overlay */}
-      <div className="relative z-20">
+    <div className="space-y-16 bg-black min-h-screen">
       {/* Hero Section */}
       {/* <section className="section-padding">
         <div className="container-custom">
@@ -170,8 +105,8 @@ const Skills: React.FC = () => {
           >
             <h2 className="text-4xl font-bold mb-4 text-green-400 font-mono">&gt; Technical Expertise</h2>
             <p className="text-xl text-green-300 max-w-2xl mx-auto font-mono">
-              Specialized in modern web and mobile technologies with a focus on creating scalable, 
-              performant applications that provide exceptional user experiences.
+              Under this summary, create three minimalist 'Glassmorphism' pill-shaped badges that slowly pulse:<br/> [Web Developer],<br/>
+               [Mobile Specialist],<br/> [Full-Stack Engineer].<br/> When a user taps one, show a quick 'pop-over' that lists my core stack <br/>(MongoDB, Express, React, Node, React Native)
             </p>
           </motion.div>
 
@@ -179,7 +114,7 @@ const Skills: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="flex flex-wrap justify-center gap-2 md:gap-4"
+            className="flex flex-wrap justify-center gap-12 md:gap-4"
           >
             {categories.map((category) => {
               const IconComponent = category.icon;
@@ -226,7 +161,7 @@ const Skills: React.FC = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.05, duration: 0.3 }}
-                    whileHover={{ y: isMobile ? -2 : -5 }}
+                    whileHover={{ y: -5 }}
                     whileTap={{ scale: 0.98 }}
                     className="card group cursor-pointer bg-gray-900/80 border border-green-500/20"
                   >
@@ -241,7 +176,7 @@ const Skills: React.FC = () => {
                             <motion.div
                               initial={{ width: 0 }}
                               animate={{ width: `${skill.level * 20}%` }}
-                              transition={{ duration: isMobile ? 0.8 : 1, delay: index * 0.05 }}
+                              transition={{ duration: 1, delay: index * 0.05 }}
                               className="h-1.5 md:h-2 rounded-full"
                               style={{ backgroundColor: color }}
                             />
@@ -282,9 +217,8 @@ const Skills: React.FC = () => {
           </motion.div>
         </div>
       </section>
-      </div>
     </div>
   );
 };
 
-export default Skills;
+export default SkillsContent;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ThemeProvider } from './hooks/useTheme';
-import Layout from './components/Layout';
+import TikTokLayout from './components/TikTokLayout';
 import Home from './pages/Home';
 import About from './pages/About';
 import Skills from './pages/Skills';
@@ -52,7 +52,7 @@ class ErrorBoundary extends React.Component<
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: <TikTokLayout />,
     errorElement: (
       <div className="min-h-screen flex items-center justify-center bg-black">
         <div className="text-center">

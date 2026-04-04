@@ -12,7 +12,7 @@ export const SAMPLE_PROJECTS: Project[] = [
   {
     id: '1',
     title: 'E-Commerce MERN Stack App',
-    description: 'Full-stack e-commerce platform built with MongoDB, Express, React, and Node.js featuring user authentication, payment processing, and admin dashboard.',
+    description: 'Full-stack e-commerce platform built with MongoDB, Express, React, and Node.js featuring user authentication, payment processing',
     longDescription: 'A comprehensive e-commerce solution featuring a modern React frontend with Redux state management, secure JWT authentication, Stripe payment integration, and a robust Node.js/Express backend with MongoDB for data persistence.',
     technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'Redux', 'Stripe', 'JWT', 'Tailwind CSS'],
     imageUrl: '/images/pro11.png',
@@ -31,7 +31,7 @@ export const SAMPLE_PROJECTS: Project[] = [
   {
     id: '2',
     title: 'BILAL: The Halal Lifestyle App',
-    description: 'A location-based Halal-lifestyle platform for the Ethiopian Muslim community, featuring mosque mapping, verified Halal services, and ethical job listings.',
+    description: 'A location-based Halal-lifestyle platform for the Ethiopian Muslim community, featuring mosque mapping, verified Halal services.',
     longDescription: 'A comprehensive React Native and Expo application designed to simplify religious practice. It integrates real-time mapping for mosques, a verified directory for Halal-certified businesses, and an ethical recruitment portal, supporting multiple languages including Amharic, Oromo, and Somali.',
     technologies: ['React Native', 'Expo', 'Node.js', 'MongoDB', 'Socket.io', 'AsyncStorage'],
     imageUrl: '/images/pro41.jpg',
