@@ -33,11 +33,11 @@ const HomeContent: React.FC = () => {
   };
 
   return (
-    <div className="relative min-h-screen bg-black">
+    <div className="relative min-h-screen bg-transparent">
       {/* Content overlay */}
       <div className="relative z-20">
         {/* Hero Section */}
-        <section className="section-padding min-h-screen flex items-center">
+        <section className="section-padding  flex items-center">
           <div className="container-custom">
             <div className="grid grid-cols-1 gap-16 items-center">
               <motion.div
@@ -242,10 +242,10 @@ const HomeContent: React.FC = () => {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {[
                 { title: 'Frontend', icon: FaReact, skills: ['React', 'TypeScript', 'Tailwind CSS'] },
-                { title: 'Backend', icon: FaNodeJs, skills: ['Node.js', 'Express', 'MongoDB'] },
+                { title: 'Backend', icon: FaNodeJs, skills: ['Node.js', 'Express', 'MongoDB...'] },
                 { title: 'Mobile', icon: FaMobile, skills: ['React Native', 'Expo', 'Cross-platform'] },
                 { title: 'Creative', icon: FaPalette, skills: ['Digital Art', 'UI/UX', 'Illustration'] },
               ].map((category, index) => (
@@ -255,13 +255,13 @@ const HomeContent: React.FC = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="text-center p-6 rounded-2xl border border-green-500/20"
+                  className="flex items-center justify-evenly p-10 rounded-2xl border border-green-500/20 "
                 >
-                  <div className="w-16 h-16 bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-4 border border-green-500/30">
+                  <div className="w-20 h-20 bg-green-900/30 rounded-full flex items-center justify-evenly border border-green-500/30">
                     <category.icon className="w-8 h-8 text-green-400" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-2 font-mono">{category.title}</h3>
-                  <ul className="space-y-1 font-mono text-sm">
+                  {/* <h3 className="text-xl font-semibold mb-2 font-mono">{category.title}</h3> */}
+                  <ul className="space-y-1  font-mono text-sm flex-wrap">
                     {category.skills.map((skill) => (
                       <li key={skill}>{skill}</li>
                     ))}

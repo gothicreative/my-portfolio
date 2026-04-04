@@ -45,7 +45,7 @@ const TikTokSidebar: React.FC = () => {
 
   return (
     <motion.div 
-      className="fixed right-2 top-1/2 -translate-y-1/2 z-40 flex flex-col gap-4"
+      className="fixed bottom-1/2 right-3 -translate-y-1/2 z-40 flex flex-col gap-4"
       initial={{ x: 100, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ delay: 0.5, duration: 0.5 }}

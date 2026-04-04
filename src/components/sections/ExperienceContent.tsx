@@ -118,7 +118,7 @@ const ExperienceContent: React.FC = () => {
   };
 
   return (
-    <div className="space-y-16 bg-black min-h-screen">
+    <div className="space-y-16 bg-transparent min-h-screen">
       {/* Hero Section */}
       <section className="section-padding">
         <div className="container-custom">

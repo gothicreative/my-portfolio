@@ -39,9 +39,9 @@ const AboutContent: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-16 bg-black min-h-screen">
+    <div className="space-y-16 bg-transparent min-h-screen">
       {/* Hero Section */}
-      <section className="section-padding bg-gradient-to-br from-black via-black/90 to-green-900/20">
+      <section className="section-padding bg-transparent">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
