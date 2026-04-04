@@ -9,7 +9,6 @@ import {
   FaHeart,
   FaDownload,
   FaGamepad,
-  FaMusic,
   FaCamera,
   FaArrowRight
 } from 'react-icons/fa';
