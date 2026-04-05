@@ -37,14 +37,14 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled || isMenuOpen
-          ? 'bg-black/80 backdrop-blur-md shadow-lg border-b border-green-500/20'
+          ? 'bg-black/80 backdrop-blur-sm shadow-lg border-b border-green-500/20'
           : 'bg-transparent'
       }`}
     >
       <nav className="container-custom section-padding py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
+          <Link to="/name" className="flex items-center space-x-2">
             <motion.div
               whileHover={{ scale: 1.05 }}
               className="text-2xl font-display font-bold text-green-400 font-mono"

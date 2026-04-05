@@ -43,9 +43,9 @@ const MatrixCodeFlow: React.FC<MatrixCodeFlowProps> = ({ className = '' }) => {
       context.fillRect(0, 0, canvas.width, canvas.height);
 
       // Draw "Hafiz" in the top-right corner
-      context.fillStyle = '#0f0'; // Bright green color
-      context.font = 'bold 20px monospace';
-      context.fillText('Hafiz', canvas.width - 80, 30);
+      // context.fillStyle = '#0f0'; // Bright green color
+      // context.font = 'bold 20px monospace';
+      // context.fillText('Hafiz', canvas.width - 80, 30);
 
       // Draw characters with varying brightness
       for (let i = 0; i < drops.length; i++) {

@@ -54,7 +54,7 @@ const TikTokBottomNav: React.FC<TikTokBottomNavProps> = ({ containerRef }) => {
       animate={{ y: 0 }}
       transition={{ delay: 0.3, duration: 0.5 }}
     >
-      <div className="flex justify-around bg-transparent items-center py-3 px-2">
+      <div className="flex justify-around bg-transparent items-center py-2 px-2">
         {NAVIGATION_ITEMS.map((item) => {
           const sectionId = item.href.replace('/', '') || 'home';
           const IconComponent = iconMap[sectionId] || FaHome;

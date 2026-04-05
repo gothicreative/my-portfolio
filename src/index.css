@@ -90,7 +90,7 @@
   }
   
   .section-padding {
-    padding: 6rem 1.5rem;
+    padding: 2.5rem 1.5rem;
   }
   
   @media (min-width: 640px) {
@@ -528,9 +528,9 @@
   position: relative;
   overflow-y: auto;
   overflow-x: hidden;
-  /* Add padding for fixed header and bottom nav */
-  padding-top: 70px;
-  padding-bottom: 80px;
+  /* Reduced padding for cleaner mobile layout - removed top header space */
+  padding-top: 20px;
+  padding-bottom: 60px;
 }
 
 /* Allow scrolling within sections if content overflows */
