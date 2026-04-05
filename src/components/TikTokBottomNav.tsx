@@ -17,12 +17,39 @@ const iconMap: { [key: string]: React.ElementType } = {
 
 const TikTokBottomNav: React.FC<TikTokBottomNavProps> = ({ containerRef }) => {
   const [activeSection, setActiveSection] = useState('home');
+  const [isVisible, setIsVisible] = useState(true);
 
   useEffect(() => {
     const container = containerRef?.current;
     if (!container) return;
 
+    let lastScrollY = container.scrollTop;
+    let ticking = false;
+
     const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          // Get scroll position from container (mobile) or fallback to window (desktop emulation)
+          const currentScrollY = container.scrollTop || window.scrollY;
+          
+          // Detect scroll direction
+          if (currentScrollY > lastScrollY && currentScrollY > 50) {
+            // Scrolling DOWN - hide navbar
+            setIsVisible(false);
+            console.log('🔽 Scrolling DOWN - Hiding navbar');
+          } else if (currentScrollY < lastScrollY) {
+            // Scrolling UP - show navbar
+            setIsVisible(true);
+            console.log('🔼 Scrolling UP - Showing navbar');
+          }
+          
+          lastScrollY = currentScrollY;
+          ticking = false;
+        });
+        ticking = true;
+      }
+
+      // Active section detection
       const sections = document.querySelectorAll('.tiktok-section');
       sections.forEach((section) => {
         const rect = section.getBoundingClientRect();
@@ -33,11 +60,17 @@ const TikTokBottomNav: React.FC<TikTokBottomNavProps> = ({ containerRef }) => {
       });
     };
 
-    container.addEventListener('scroll', handleScroll);
+    // Listen to both container scroll and window scroll for better compatibility
+    container.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
     // Initial check
     handleScroll();
     
-    return () => container.removeEventListener('scroll', handleScroll);
+    return () => {
+      container.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, [containerRef]);
 
   const scrollToSection = (sectionId: string) => {
@@ -49,10 +82,10 @@ const TikTokBottomNav: React.FC<TikTokBottomNavProps> = ({ containerRef }) => {
 
   return (
     <motion.nav 
-      className="backdrop-blur-m rounded-lg shadow-lg -mx-4 px-4 fixed bottom-0 left-0 right-0 z-50 tiktok-bottom-nav  md:hidden"
+      className="backdrop-blur-m rounded-lg shadow-lg -mx-4 px-4 fixed bottom-0 left-0 right-0 z-50 tiktok-bottom-nav md:hidden"
       initial={{ y: 100 }}
-      animate={{ y: 0 }}
-      transition={{ delay: 0.3, duration: 0.5 }}
+      animate={{ y: isVisible ? 0 : 100 }}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
       <div className="flex justify-around bg-transparent items-center py-2 px-2">
         {NAVIGATION_ITEMS.map((item) => {
