@@ -1,8 +1,3 @@
-Project Overview
-Your my-portfolio is a MERN Stack Developer Portfolio - a modern, interactive portfolio website for Hafiz Adem featuring:
-
-Tech Stack: React 19 + TypeScript + Vite + Tailwind CSS
-Theme: Dark mode with Matrix-inspired green terminal aesthetic
 Key Features:
 Home/Hero section with tech stack showcase
 About page with skills, journey, and interests
