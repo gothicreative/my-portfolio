@@ -1,69 +1,111 @@
-# React + TypeScript + Vite
+Project Overview
+Your my-portfolio is a MERN Stack Developer Portfolio - a modern, interactive portfolio website for Hafiz Adem featuring:
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Tech Stack: React 19 + TypeScript + Vite + Tailwind CSS
+Theme: Dark mode with Matrix-inspired green terminal aesthetic
+Key Features:
+Home/Hero section with tech stack showcase
+About page with skills, journey, and interests
+Skills & Experience pages
+Contact form (with EmailJS integration)
+Responsive design with Framer Motion animations
+React Router for navigation
+Suggested README Content
+Markdown
+# My Portfolio
 
-Currently, two official plugins are available:
+A modern, interactive portfolio website showcasing full-stack development expertise with a Matrix-inspired terminal aesthetic.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🎯 About This Project
 
-## Expanding the ESLint configuration
+This is a personal portfolio for **Hafiz Adem**, a MERN Stack Developer and digital artist specializing in full-stack web development and React Native cross-platform applications. The portfolio features a sleek, terminal-inspired design that reflects my passion for clean code and creative visual experiences.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Key Sections
+- **Home** - Hero section with tech stack highlights and featured projects
+- **About** - Professional journey, technical expertise, and creative approach
+- **Skills** - Detailed skill breakdown with proficiency levels
+- **Experience** - Project portfolio and work experience
+- **Contact** - Direct contact form for inquiries
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+### Frontend
+- **React 19** - UI framework
+- **TypeScript** - Type-safe development
+- **Vite** - Lightning-fast build tool
+- **Tailwind CSS** - Utility-first styling
+- **Framer Motion** - Smooth animations
+- **React Router v6** - Client-side routing
+- **React Icons** - Icon library
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Backend Integrations
+- **EmailJS** - Contact form email service
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Development Tools
+- **ESLint** - Code quality
+- **TypeScript** - Type checking
+- **Autoprefixer** - CSS compatibility
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚀 Key Features
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+✨ **Responsive Design** - Optimized for desktop, tablet, and mobile
+🎨 **Interactive Animations** - Smooth Framer Motion transitions
+🌓 **Dark Mode** - Terminal-inspired green-on-black theme
+📧 **Contact Integration** - Direct email inquiries via EmailJS
+⚡ **Performance** - Fast loading with Vite and optimized assets
+🎯 **SEO Friendly** - Semantic HTML and meta tags
+♿ **Accessible** - WCAG compliant interactive components
+
+## 📦 Getting Started
+
+### Prerequisites
+- Node.js (v16 or higher)
+- npm or yarn
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/gothicreative/my-portfolio.git
+cd my-portfolio
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+Build for Production
+bash
+npm run build
+This will create an optimized production build in the dist folder.
+
+Preview Production Build
+bash
+npm run preview
+📁 Project Structure
+Code
+src/
+├── pages/              # Page components (Home, About, Skills, etc.)
+├── components/         # Reusable components
+├── hooks/              # Custom React hooks (useTheme)
+├── utils/              # Utilities and constants
+├── styles/             # Global styles
+└── App.tsx             # Main app component
+🎨 Design Highlights
+Terminal Aesthetic - Matrix-inspired green text on black background
+Smooth Animations - Framer Motion for engaging interactions
+Mobile-First - Responsive design for all devices
+Modern UI - Clean cards, buttons, and typography
+📝 Scripts
+npm run dev - Start development server
+npm run build - Build for production
+npm run lint - Run ESLint
+npm run preview - Preview production build
+📧 Contact & Connect
+Email - Get in touch via the contact form
+GitHub - @gothicreative
+Resume - Download from portfolio
+📄 License
+This project is open source and available under the MIT License.
+
+Built with ❤️ by Hafiz Adem
