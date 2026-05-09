@@ -1,12 +1,3 @@
-Key Features:
-Home/Hero section with tech stack showcase
-About page with skills, journey, and interests
-Skills & Experience pages
-Contact form (with EmailJS integration)
-Responsive design with Framer Motion animations
-React Router for navigation
-Suggested README Content
-Markdown
 # My Portfolio
 
 A modern, interactive portfolio website showcasing full-stack development expertise with a Matrix-inspired terminal aesthetic.
